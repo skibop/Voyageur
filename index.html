@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <header>
+    <img src="/assets/clean.png" alt="Your Logo" class="logo">
+    <h1>Welcome to Voyageur!</h1>
+    <nav>
+      <ul class="navbar">
+        <li><a href="/components/html/calculator.html" class="nav-link">GPA Calculator</a></li>
+        <li><a href="/components/html/Q&A.html" class="nav-link">Q&A and Help</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="glass">
+      <h2>Profile</h2>
+      <div class="profile-content">
+        <div class="image-container">
+          <img src="./assets/yearbook.png" alt="Service Image Description">
+        </div>
+        <div class="text-content">
+          <p> Name: Ankit Kale </p>
+          <p> ID: 10022733 </p>
+          <p> Grade: 10 </p>
+          <p> Time: <span id="current-time"></span> </p>
+          <p> Date: <span id="current-date"></span> </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <div id="modal" style="display: none;">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+      <img id="modal-image" src="./assets/yearbook.png" alt="Enlarged Image">
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Glassmorphism Page. All rights reserved.</p>
+  </footer>
+
+  <script src="/components/scripts/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #000000, #363636);
+    color: #fff;
+  }
+  
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    backdrop-filter: blur(10px);
+  }
+  
+  h1 {
+    margin: 0;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  main {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  section {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .glass {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+  
+  .glass:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  footer {
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .calculator-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .calculator-content p {
+    margin-bottom: 15px;
+  }
+  
+  header {
+    position: relative;
+  }
+
+  .logo {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* Change right to left */
+    width: 200px; /* Adjust this value for the desired width */
+    height: auto; /* Maintain aspect ratio */
+  }
