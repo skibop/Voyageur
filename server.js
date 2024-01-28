@@ -25,7 +25,8 @@ app.post('/login', async (req, res) => {
     const user = await collection.findOne({ username, password });
 
     if (user) {
-      res.sendFile(__dirname + '/index.html');
+      // Redirect to index.html
+      res.redirect('/index.html');
     } else {
       res.sendFile(__dirname + '/components/failure.html');
     }
@@ -36,6 +37,7 @@ app.post('/login', async (req, res) => {
     await client.close();
   }
 });
+
 
 const port = process.env.PORT
 app.listen(port, () => {
