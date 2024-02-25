@@ -1,0 +1,107 @@
+body {
+  font-family: 'Open Sans', sans-serif; /* Use Open Sans font for the entire document */
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #4285f4, #b388ff); /* Blue to Light Purple */
+  color: #fff;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  backdrop-filter: blur(10px);
+}
+
+h1 {
+  margin: 0;
+  color: #fff;
+  text-align: center;
+  font-size: 2em;
+  font-family: 'Open Sans', sans-serif; /* Use Open Sans font for the header */
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+main {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.glass {
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.glass:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+}
+
+.logo {
+  max-width: 400px; /* Adjust this to change the maximum width of the logo */
+  max-height: 400px; /* Adjust this to change the maximum height of the logo */
+  width: auto; /* This will keep the aspect ratio of the logo intact */
+  height: auto; /* This will keep the aspect ratio of the logo intact */
+  position: absolute; /* This will take the logo out of the normal document flow */
+  top: -110px; /* This will position the logo 20px from the top of the page */
+  left: -90px; /* This will position the logo 20px from the left of the page */
+}
+
+.instruction-list {
+  font-size: 1.2em; /* Increase the font size of the bullet points */
+  list-style-type: none; /* Remove default list styles */
+}
+
+.instruction-list li {
+  font-size: 1.1em;
+  margin-bottom: 20px;
+  position: relative;
+  font-family: 'Open Sans', sans-serif; /* Use Open Sans font for the list items */
+}
+
+.instruction-list li:before {
+  content: "\2022"; /* Unicode character for a bullet point */
+  color: #fff; /* Set the color of the bullet point */
+  font-weight: bold; /* Make the bullet point bold */
+  display: inline-block;
+  width: 1em; /* Set the width of the bullet point */
+  position: absolute; /* Position the bullet point absolutely */
+  left: -1.5em; /* Adjust the positioning to align with the list item */
+  top: 0.1em; /* Adjust the vertical position of the bullet point */
+}

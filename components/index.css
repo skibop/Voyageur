@@ -1,9 +1,10 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to right, #000000, #363636); /* Updated background colors */
+  background: linear-gradient(to right, #4285f4, #b388ff); /* Blue to Light Purple */
   color: #fff;
+  overflow: hidden; /* Add this line to remove the scrollbar */
 }
 
 header {
@@ -172,11 +173,15 @@ header {
 }
 
 .logo {
-  position: absolute;
-  top: 10px;
-  left: 10px; /* Change right to left */
-  width: 200px; /* Adjust this value for the desired width */
-  height: auto; /* Maintain aspect ratio */
+  max-width: 400px; /* Adjust this to change the maximum width of the logo */
+  max-height: 400px; /* Adjust this to change the maximum height of the logo */
+  width: auto; /* This will keep the aspect ratio of the logo intact */
+  height: auto; /* This will keep the aspect ratio of the logo intact */
+  position: absolute; /* This will take the logo out of the normal document flow */
+  top: -110px; /* This will position the logo 20px from the top of the page */
+  left: -90px; /* This will position the logo 20px from the left of the page */
 }
 
-
+.text-content h1 {
+  margin-bottom: 20px; /* Add space below each line */
+}

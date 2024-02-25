@@ -1,34 +1,47 @@
-require('dotenv').config({ path: 'key.env' });
+// Import required modules
 const express = require('express');
-const app = express();
 const { MongoClient } = require('mongodb');
 const bodyParser = require('body-parser');
+const path = require('path');
+const session = require('express-session');
+require('dotenv').config({ path: './components/key.env' });
 
-app.use(express.static(__dirname));
+// Initialize Express app
+const app = express();
+
+// Middleware
+app.use(express.static(path.join(__dirname, 'components'))); // Serve static files
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // Use HTTPS in production
+}));
 
-const uri = process.env.MONGO_URI
+// Database configuration
+const uri = process.env.MONGO_URI;
 const dbName = 'VoyageurDB';
+
+// Routes
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'components', 'login', 'login.html'));
+});
 
 app.post('/login', async (req, res) => {
   const client = new MongoClient(uri);
-
   try {
     await client.connect();
-    
     const database = client.db(dbName);
     const collection = database.collection('Login-Information');
-
     const { username, password } = req.body;
-
-    // Check if the username and password match in the database
     const user = await collection.findOne({ username, password });
-
     if (user) {
-      // Redirect to index.html
-      res.redirect('/index.html');
+      req.session.user = user;
+      res.redirect('/profile');
     } else {
-      res.sendFile(__dirname + '/components/failure.html');
+      res.status(401).send('Invalid credentials');
     }
   } catch (error) {
     console.error('Error connecting to the database:', error.message);
@@ -38,8 +51,25 @@ app.post('/login', async (req, res) => {
   }
 });
 
+app.get('/profile', (req, res) => {
+  if (req.session.user) {
+    res.sendFile(path.join(__dirname, 'components', 'index.html'));
+  } else {
+    res.redirect('/login');
+  }
+});
 
-const port = process.env.PORT
+
+app.get('/get-user-data', (req, res) => {
+  if (req.session.user) {
+    res.json(req.session.user);
+  } else {
+    res.status(401).send('Not logged in');
+  }
+});
+
+// Start server
+const port = process.env.PORT;
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}/login`);
 });

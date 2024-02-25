@@ -13,19 +13,8 @@ function updateTime() {
 updateTime();
 setInterval(updateTime, 1000);
 
-function openModal() {
-  const modal = document.getElementById('modal');
-  modal.style.display = 'block';
-}
-
-function closeModal() {
-  const modal = document.getElementById('modal');
-  modal.style.display = 'none';
-}
-
 // Event listener to open the modal when clicking on the yearbook image
 document.querySelector('.image-container img').addEventListener('click', openModal);
-
 
 function applyBlur() {
   const elementsToBlur = document.querySelectorAll('body > *:not(#modal)');
@@ -42,17 +31,37 @@ function removeBlur() {
   });
 }
 
-// Event listener to open the modal when clicking on the image
-document.querySelector('.image-container img').addEventListener('click', function() {
+function openModal() {
   const modal = document.getElementById('modal');
   modal.style.display = 'block';
-  applyBlur(); // Apply blur effect to other elements
-});
+  applyBlur(); // Apply blur when modal is opened
+}
 
-// Event listener to close the modal
-document.querySelector('.close').addEventListener('click', function() {
+function closeModal() {
   const modal = document.getElementById('modal');
   modal.style.display = 'none';
-  removeBlur(); // Remove blur effect
-});
+  removeBlur(); // Remove blur when modal is closed
+}
+
+async function fetchUserData() {
+  try {
+    const response = await fetch('/get-user-data');
+
+    if (!response.ok) {
+      throw new Error('Not logged in');
+    }
+
+    const userData = await response.json();
+
+    // Update profile information based on fetched data
+    document.getElementById('name').textContent = userData.name || 'N/A';
+    document.getElementById('id').textContent = userData.ID || 'N/A'; // Use 'ID' field from your MongoDB document
+    document.getElementById('grade').textContent = userData.grade || 'N/A';
+  } catch (error) {
+    console.error('Error fetching user data:', error.message);
+  }
+}
+
+// Call fetchUserData function when the page loads
+fetchUserData();
 

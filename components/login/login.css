@@ -1,43 +1,50 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to right, #000000, #363636);
+  background: linear-gradient(to right, #3d749e64, #3AA0F0), url('/assets/background.png') center/cover no-repeat;
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  flex-direction: column;
 }
 
 .container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .login-container {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(40, 128, 204, 0.2);
   padding: 40px;
   border-radius: 10px;
   text-align: center;
   width: 400px;
-  margin-right: 20px; /* Margin for spacing between login and logo */
-}
-
-.additional-content {
-  display: flex;
-  align-items: center;
+  margin-right: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(40, 128, 204, 0.4);
 }
 
 .logo-container {
-  margin-right: 20px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
 
 .logo {
-  width: 380px; /* Adjust the width as needed */
-  height: auto;
-  display: block;
-  margin: 0 auto; /* Center the logo horizontally */
+  max-width: 400px; /* Adjust this to change the maximum width of the logo */
+  max-height: 400px; /* Adjust this to change the maximum height of the logo */
+  width: auto; /* This will keep the aspect ratio of the logo intact */
+  height: auto; /* This will keep the aspect ratio of the logo intact */
+  position: absolute; /* This will take the logo out of the normal document flow */
+  top: -110px; /* This will position the logo 20px from the top of the page */
+  left: -90px; /* This will position the logo 20px from the left of the page */
 }
+
+
 
 h2,
 label,
@@ -55,6 +62,7 @@ input {
   margin-bottom: 20px;
   border: none;
   border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .links {
@@ -63,7 +71,7 @@ input {
 }
 
 .links a {
-  color: #5F9EA0;
+  color: #86BBD8;
   text-decoration: none;
   margin: 0 10px;
 }
@@ -73,7 +81,7 @@ input {
 }
 
 button {
-  background-color: #1F629D;
+  background-color: #004080;
   color: white;
   padding: 12px;
   border: none;
@@ -83,7 +91,7 @@ button {
 }
 
 button:hover {
-  background-color: #5F9EA0;
+  background-color: #005699;
 }
 
 .additional-content {
@@ -91,9 +99,9 @@ button:hover {
   margin-top: 20px;
 }
 
-/* Additional content styles */
 .additional-content p {
-  max-width: 350px; /* Adjust the width as needed */
+  max-width: 350px;
   text-align: justify;
-  margin: 0 auto; /* Center the paragraph */
+  margin: 0 auto;
+  color: #dcdcdc;
 }
