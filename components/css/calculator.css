@@ -149,3 +149,23 @@ button:hover {
 .button-container button {
   margin: 0 10px;
 }
+
+    /* Additional CSS for button placement */
+    .button-group {
+      display: flex;
+      gap: 10px; /* Adjust the spacing between buttons */
+    }
+
+    .button-group button {
+      flex: 1; /* Make buttons flexible to occupy equal space */
+    }
+
+
+    .removeRowBtn {
+      background-color: transparent;
+      border: none;
+      color: white; /* Change text color to white */
+      font-size: 20px;
+      cursor: pointer;
+    }
+    

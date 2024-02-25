@@ -32,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
                             <option value="ap">AP/College-Level</option>
                         </select>
                     </td>
-                    <td><button class="removeRowBtn">Remove Row</button></td>
-                </tr>
+                    <td><button class="removeRowBtn">&times;</button></td> <!-- Replace "Remove Row" text with &times; for X -->
+                    </tr>
             `;
             tableBody.insertAdjacentHTML("beforeend", newRow);
         }

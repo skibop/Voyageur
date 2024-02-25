@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="/css/calculator.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .removeRowBtn {
+      background-color: transparent;
+      border: none;
+      color: red;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -21,6 +30,9 @@
   <main>
     <section class="glass">
       <h2>GPA Calculator</h2>
+      <a href="https://imgur.com/a/J7MQP8V" target="_blank" style="color: white; text-decoration: none;">
+        <h4>Grading Scale</h4>
+      </a>
       <div class="calculator-content">
         <table>
           <thead>
@@ -57,24 +69,21 @@
                   <option value="ap">AP</option>
                 </select>
               </td>
-              <td><button class="removeRowBtn">Remove Row</button></td>
+              <td><button class="removeRowBtn">&times;</button></td> <!-- Replace "Remove Row" text with &times; for X -->
             </tr>
           </tbody>
         </table>
-        <button id="addRowBtn">Add Row</button>
-        <button id="calculateBtn">Calculate GPA</button>
+        <div class="button-group">
+          <button id="addRowBtn">Add Row</button>
+          <button id="calculateBtn">Calculate GPA</button>
+        </div>
         <div class="gpa-results">
-          <span class="weighted-gpa">Weighted GPA: <span class="result-value">--</span></span>
-          <span class="unweighted-gpa">Unweighted GPA: <span class="result-value">--</span></span>
+          <span class="weighted-gpa"><strong>Weighted GPA:</strong> <strong><span class="result-value">--</span></span></strong>
+          <span class="unweighted-gpa"><strong>Unweighted GPA:</strong> <strong><span class="result-value">--</span></strong></span>
         </div>
       </div>
     </section>
   </main>
-
-  <footer>
-    <p>&copy; 2024 Glassmorphism Page. All rights reserved.</p>
-  </footer>
-
   <script src="/scripts/calculator.js"></script>
 </body>
 </html>
