@@ -4,6 +4,7 @@ body {
   padding: 0;
   background: linear-gradient(to right, #4285f4, #b388ff); /* Blue to Light Purple */
   color: #fff;
+  overflow: hidden;
 }
 
 header {
@@ -20,7 +21,6 @@ h1 {
   color: #fff;
   text-align: center;
   font-size: 2em;
-  font-family: 'Open Sans', sans-serif; /* Use Open Sans font for the header */
 }
 
 .navbar {
@@ -84,24 +84,23 @@ footer {
 }
 
 .instruction-list {
-  font-size: 1.2em; /* Increase the font size of the bullet points */
-  list-style-type: none; /* Remove default list styles */
+  font-size: 1.2em;
+  list-style-type: none;
 }
 
 .instruction-list li {
   font-size: 1.1em;
   margin-bottom: 20px;
   position: relative;
-  font-family: 'Open Sans', sans-serif; /* Use Open Sans font for the list items */
 }
 
 .instruction-list li:before {
-  content: "\2022"; /* Unicode character for a bullet point */
-  color: #fff; /* Set the color of the bullet point */
-  font-weight: bold; /* Make the bullet point bold */
+  content: "\2022";
+  color: #fff;
+  font-weight: bold;
   display: inline-block;
-  width: 1em; /* Set the width of the bullet point */
-  position: absolute; /* Position the bullet point absolutely */
-  left: -1.5em; /* Adjust the positioning to align with the list item */
-  top: 0.1em; /* Adjust the vertical position of the bullet point */
+  width: 1em;
+  position: absolute;
+  left: -1.5em;
+  top: 0.1em;
 }

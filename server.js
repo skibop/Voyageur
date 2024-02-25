@@ -10,14 +10,14 @@ require('dotenv').config({ path: './components/key.env' });
 const app = express();
 
 // Middleware
-app.use(express.static(path.join(__dirname, 'components'))); // Serve static files
+app.use(express.static(path.join(__dirname, 'components')));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // Use HTTPS in production
+  cookie: { secure: false }
 }));
 
 // Database configuration
@@ -25,18 +25,15 @@ const uri = process.env.MONGO_URI;
 const dbName = 'VoyageurDB';
 
 // Routes
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'components', 'login', 'login.html'));
-});
+app.get('/login', (req, res) => res.sendFile(path.join(__dirname, 'components', 'login', 'login.html')));
 
 app.post('/login', async (req, res) => {
   const client = new MongoClient(uri);
   try {
     await client.connect();
-    const database = client.db(dbName);
-    const collection = database.collection('Login-Information');
-    const { username, password } = req.body;
-    const user = await collection.findOne({ username, password });
+    const user = await client.db(dbName)
+      .collection('Login-Information')
+      .findOne(req.body);
     if (user) {
       req.session.user = user;
       res.redirect('/profile');
@@ -51,25 +48,10 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.get('/profile', (req, res) => {
-  if (req.session.user) {
-    res.sendFile(path.join(__dirname, 'components', 'index.html'));
-  } else {
-    res.redirect('/login');
-  }
-});
+app.get('/profile', (req, res) => req.session.user ? res.sendFile(path.join(__dirname, 'components', 'index.html')) : res.redirect('/login'));
 
-
-app.get('/get-user-data', (req, res) => {
-  if (req.session.user) {
-    res.json(req.session.user);
-  } else {
-    res.status(401).send('Not logged in');
-  }
-});
+app.get('/get-user-data', (req, res) => req.session.user ? res.json(req.session.user) : res.status(401).send('Not logged in'));
 
 // Start server
 const port = process.env.PORT;
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}/login`);
-});
+app.listen(port, () => console.log(`Server is running on http://localhost:${port}/login`));

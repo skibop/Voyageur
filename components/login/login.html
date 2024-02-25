@@ -4,33 +4,12 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="login.css">
   <title>Login Page</title>
-  <script>
-fetch('/login', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({ username, password })
-})
-.then(response => {
-  console.log('Response status:', response.status); // Log the response status
-  console.log('Redirected:', response.redirected); // Log whether the response is a redirect
-  console.log('URL:', response.url); // Log the URL of the response
-
-  if (response.status === 200) {
-    window.location.href = response.url; // Redirect to the URL in the response
-  } else {
-    alert('Invalid credentials');
-  }
-})
-.catch(error => console.error('Error:', error));
-</script>
 </head>
 <body>
   <div class="container">
     <div class="login-container">
       <h2>Welcome!</h2>
-      <form action="/login" method="post">
+      <form id="login-form" action="/login" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 
@@ -39,6 +18,7 @@ fetch('/login', {
         
         <button type="submit">Sign In</button>
       </form>
+      <div id="error-message" class="error-message"></div> <!-- New div for error message -->
     </div>
 
     <div class="additional-content">
@@ -46,6 +26,8 @@ fetch('/login', {
         <img src="/assets/clean.png" alt="Your Logo" class="logo">
       </div>
     </div>
-  </div>  
+  </div>
+
+  <script src="/scripts/login.js"></script> <!-- Include login.js for handling form submission -->
 </body>
 </html>
