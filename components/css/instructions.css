@@ -74,13 +74,13 @@ footer {
 }
 
 .logo {
-  max-width: 400px; /* Adjust this to change the maximum width of the logo */
-  max-height: 400px; /* Adjust this to change the maximum height of the logo */
-  width: auto; /* This will keep the aspect ratio of the logo intact */
-  height: auto; /* This will keep the aspect ratio of the logo intact */
-  position: absolute; /* This will take the logo out of the normal document flow */
-  top: -110px; /* This will position the logo 20px from the top of the page */
-  left: -90px; /* This will position the logo 20px from the left of the page */
+  max-width: 400px;
+  max-height: 400px; 
+  width: auto;
+  height: auto;
+  position: absolute; 
+  top: -110px; 
+  left: -90px;
 }
 
 .instruction-list {
