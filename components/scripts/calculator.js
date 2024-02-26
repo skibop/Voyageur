@@ -57,16 +57,23 @@ document.addEventListener("DOMContentLoaded", function () {
         let unweightedTotal = 0;
         let totalCredits = 0;
 
+        // Iterate through Grades
         for (let i = 0; i < grades.length; i++) {
             const grade = grades[i].value;
             const credit = parseFloat(credits[i].value);
             const classType = classTypes[i].value;
 
+            // Validate Credits
             if (credit < 0) {
                 alert("Credits cannot be negative.");
                 return;
             }
+            if (credit > 10) {
+                alert("Credits can not be above 10");
+                return;
+            }
 
+            // Defining the grade values for Standard
             let gradePoints;
             switch (grade) {
                 case "A": gradePoints = 4.00; break;
@@ -90,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 weightedGradePoints += 1.0; // Add 1.0 to the grade points for AP/college-level classes
             }
 
+            // Calculation of Quality Points
             const qualityPoints = weightedGradePoints * credit;
             totalCredits += credit;
             weightedTotal += qualityPoints;
