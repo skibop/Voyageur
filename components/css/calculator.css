@@ -159,13 +159,11 @@ button:hover {
     .button-group button {
       flex: 1; /* Make buttons flexible to occupy equal space */
     }
-
-
+    
     .removeRowBtn {
       background-color: transparent;
       border: none;
-      color: white; /* Change text color to white */
+      color: red;
       font-size: 20px;
       cursor: pointer;
     }
-    
