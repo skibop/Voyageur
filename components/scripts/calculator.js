@@ -89,12 +89,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 default: gradePoints = 0; // Default case for unknown grades
             }
 
-            let weightedGradePoints = gradePoints;
-            // For weighted GPA, add additional points for honors and AP classes
-            if (classType === "honors") {
-                weightedGradePoints += 0.5; // Add 0.5 to the grade points for honors classes
-            } else if (classType === "ap") {
-                weightedGradePoints += 1.0; // Add 1.0 to the grade points for AP/college-level classes
+            let weightedGradePoints;
+            // For D or F grades, don't add extra points for honors or AP classes
+            if (grade === "D" || grade === "F") {
+                weightedGradePoints = gradePoints;
+            } else {
+                weightedGradePoints = gradePoints;
+                // For weighted GPA, add additional points for honors and AP classes
+                if (classType === "honors") {
+                    weightedGradePoints += 0.5; // Add 0.5 to the grade points for honors classes
+                } else if (classType === "ap") {
+                    weightedGradePoints += 1.0; // Add 1.0 to the grade points for AP/college-level classes
+                }
             }
 
             // Calculation of Quality Points
