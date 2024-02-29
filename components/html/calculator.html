@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="/components/css/calculator.css">
+  <link rel="stylesheet" href="/css/calculator.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
@@ -10,8 +11,9 @@
     <h1>GPA Calculator</h1>
     <nav>
       <ul class="navbar">
-        <li><a href="/index.html" class="nav-link">Home</a></li>
-        <li><a href="/components/html/Q&A.html" class="nav-link">Q&A and Help</a></li>
+        <li><a href="/index.html" class="nav-link">Home</a></li>  
+        <li><a href="/html/instructions.html" class="nav-link">Instructions</a></li>
+        <li><a href="/html/Q&A.html" class="nav-link">Q&A</a></li>
       </ul>
     </nav>
   </header>
@@ -19,15 +21,60 @@
   <main>
     <section class="glass">
       <h2>GPA Calculator</h2>
+      <a href="https://imgur.com/a/J7MQP8V" target="_blank" style="color: white; text-decoration: none;">
+        <h4>Grading Scale</h4>
+      </a>
       <div class="calculator-content">
-        <!-- Calculator content goes here -->
-        <p>This is where the GPA calculator content will be.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Class Name</th>
+              <th>Grade</th>
+              <th>Credits</th>
+              <th>Class Type</th>
+              <th></th> <!-- Empty header for Remove Row buttons -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" name="class_name[]" placeholder="Class Name" class="input-field"></td>
+              <td>
+                <select name="grade[]" class="select-field">
+                  <option value="A">A</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="B-">B-</option>
+                  <option value="C+">C+</option>
+                  <option value="C">C</option>
+                  <option value="C-">C-</option>
+                  <option value="D">D</option>
+                  <option value="F">F</option>
+                </select>
+              </td>
+              <td><input type="number" name="credits[]" placeholder="Credits" min="0" class="input-field"></td>
+              <td>
+                <select name="class_type[]" class="select-field">
+                  <option value="standard">Standard</option>
+                  <option value="honors">Honors</option>
+                  <option value="ap">AP/College-Level</option>
+                </select>
+              </td>
+              <td><button class="removeRowBtn">&times;</button></td> <!-- Replace "Remove Row" text with &times; for X -->
+            </tr>
+          </tbody>
+        </table>
+        <div class="button-group">
+          <button id="addRowBtn">Add Row</button>
+          <button id="calculateBtn">Calculate GPA</button>
+        </div>
+        <div class="gpa-results">
+          <span class="weighted-gpa"><strong>Weighted GPA:</strong> <strong><span class="result-value">--</span></span></strong>
+          <span class="unweighted-gpa"><strong>Unweighted GPA:</strong> <strong><span class="result-value">--</span></strong></span>
+        </div>
       </div>
     </section>
   </main>
-
-  <footer>
-    <p>&copy; 2024 Glassmorphism Page. All rights reserved.</p>
-  </footer>
+  <script src="/scripts/calculator.js"></script>
 </body>
 </html>

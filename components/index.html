@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <img src="/assets/clean.png" alt="Your Logo" class="logo">
+    <h1>Welcome to Voyageur!</h1>
+    <nav>
+      <ul class="navbar">
+        <li><a href="/html/instructions.html" class="nav-link">Instructions</a></li>
+        <li><a href="/html/calculator.html" class="nav-link">GPA Calculator</a></li>
+        <li><a href="/html/Q&A.html"class="nav-link">Q&A</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="glass">
+      <h2>Profile</h2>
+      <div class="profile-content">
+        <div class="image-container">
+          <img src="./assets/yearbook.png" alt="Service Image Description" onclick="openModal()">
+        </div>
+        <div class="text-content">
+          <h1>Name: <span id="name">N/A</span></h1>
+          <h1>ID: <span id="id">N/A</span></h1>
+          <h1>Grade: <span id="grade">N/A</span></h1>
+          <h1><span id="current-time"></span></h1>
+          <h1><span id="current-date"></span></h1>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal" onclick="closeModal()">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+      <img id="modal-image" src="./assets/yearbook.png" alt="Enlarged Image">
+    </div>
+  </div>
+  <script src="./scripts/index.js" defer></script>
+</body>
+</html>

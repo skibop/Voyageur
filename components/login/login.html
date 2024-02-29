@@ -8,16 +8,17 @@
 <body>
   <div class="container">
     <div class="login-container">
-      <h2>Login</h2>
-      <form action="/login" method="post">
+      <h2>Welcome!</h2>
+      <form id="login-form" action="/login" method="post">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
         
-        <button type="submit">Login</button>
+        <button type="submit">Sign In</button>
       </form>
+      <div id="error-message" class="error-message"></div> <!-- New div for error message -->
     </div>
 
     <div class="additional-content">
@@ -26,5 +27,7 @@
       </div>
     </div>
   </div>
+
+  <script src="/scripts/login.js"></script> <!-- Include login.js for handling form submission -->
 </body>
 </html>

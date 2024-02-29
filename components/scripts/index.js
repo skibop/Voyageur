@@ -1,31 +1,16 @@
-// script.js
 function updateTime() {
   const now = new Date();
   const timeElement = document.getElementById('current-time');
   const dateElement = document.getElementById('current-date');
 
-  // Update time and date elements with current values
   timeElement.textContent = now.toLocaleTimeString();
   dateElement.textContent = now.toDateString();
 }
 
-// Call updateTime function initially and every second (to update time continuously)
 updateTime();
 setInterval(updateTime, 1000);
 
-function openModal() {
-  const modal = document.getElementById('modal');
-  modal.style.display = 'block';
-}
-
-function closeModal() {
-  const modal = document.getElementById('modal');
-  modal.style.display = 'none';
-}
-
-// Event listener to open the modal when clicking on the yearbook image
 document.querySelector('.image-container img').addEventListener('click', openModal);
-
 
 function applyBlur() {
   const elementsToBlur = document.querySelectorAll('body > *:not(#modal)');
@@ -34,7 +19,6 @@ function applyBlur() {
   });
 }
 
-// Function to remove blur effect
 function removeBlur() {
   const elementsToBlur = document.querySelectorAll('body > *:not(#modal)');
   elementsToBlur.forEach(element => {
@@ -42,17 +26,34 @@ function removeBlur() {
   });
 }
 
-// Event listener to open the modal when clicking on the image
-document.querySelector('.image-container img').addEventListener('click', function() {
+function openModal() {
   const modal = document.getElementById('modal');
   modal.style.display = 'block';
-  applyBlur(); // Apply blur effect to other elements
-});
+  applyBlur();
+}
 
-// Event listener to close the modal
-document.querySelector('.close').addEventListener('click', function() {
+function closeModal() {
   const modal = document.getElementById('modal');
   modal.style.display = 'none';
-  removeBlur(); // Remove blur effect
-});
+  removeBlur();
+}
 
+async function fetchUserData() {
+  try {
+    const response = await fetch('/get-user-data');
+
+    if (!response.ok) {
+      throw new Error('Not logged in');
+    }
+
+    const userData = await response.json();
+
+    document.getElementById('name').textContent = userData.name || 'N/A';
+    document.getElementById('id').textContent = userData.ID || 'N/A';
+    document.getElementById('grade').textContent = userData.grade || 'N/A';
+  } catch (error) {
+    console.error('Error fetching user data:', error.message);
+  }
+}
+
+fetchUserData();
