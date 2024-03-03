@@ -2,3 +2,4 @@ node_modules
 package-lock.json
 package.json
 compiled-list.md
+./components/key.env
