@@ -20,7 +20,7 @@ app.use(session({
   secret: process.env.SECRET, // Secret key used for session encryption
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // Configure session cookies
+  cookie: { secure: true } // Configure session cookies
 }));
 
 // Database configuration
@@ -69,3 +69,5 @@ app.get('/get-user-data', (req, res) => req.session.user ? res.json(req.session.
 // Start server
 const port = process.env.PORT; // Port number from environment variables
 app.listen(port, () => console.log(`Server is running on http://localhost:${port}/login`)); // Start the Express server and log the URL
+
+

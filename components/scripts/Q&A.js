@@ -1,57 +1,88 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const chatBox = document.getElementById("chat-box");
-    const userInput = document.getElementById("user-input");
-    const sendBtn = document.getElementById("send-btn");
+// Patterns that are generally human and recognizable
 
-    // Function to send a message
-    function sendMessage() {
-        const userMessage = userInput.value.trim();
-        if (userMessage !== "") {
-            appendMessage("user", userMessage);
-            getBotResponse(userMessage);
-            userInput.value = "";
+var patterns = [
+    { pattern: /\b(calculate|computing|how to calculate)\b.*\bGPA\b/i, response: 'To calculate GPA, you need to perform a series of mathematical operations.' },
+    { pattern: /\b(mean|meaning)\b.*\bGPA\b/i, response: 'GPA stands for Grade Point Average, a measure of academic performance in numerical value.' },
+    { pattern: /\b(raise|improve|boost)\b.*\bGPA\b/i, response: 'To improve your GPA, consider studying more effectively, seeking help from tutors, or participating in study groups.' },
+    { pattern: /\b(low|bad|poor)\b.*\bGPA\b/i, response: 'A low GPA can pose challenges, but proactive steps such as seeking academic support and adjusting study habits can help improve it.' },
+    { pattern: /\b(high|good|excellent)\b.*\bGPA\b/i, response: 'A high GPA typically indicates strong academic performance and may open doors to various opportunities.' },
+    { pattern: /\b(does|is)\b.*\bGPA\b.*\b(matter|important|count)\b/i, response: 'Whether a GPA matters depends on factors such as career goals, academic aspirations, and specific institutions admission criteria.' },
+    { pattern: /\baverage\b.*\bGPA\b/i, response: 'The average GPA can vary based on factors such as institution, academic program, and grading scale.' },
+    { pattern: /\b(convert|change|translate)\b.*\bGPA\b/i, response: 'To convert a GPA, you typically use standardized formulas or conversion charts to translate it into different grading systems.' },
+    { pattern: /\b(difference|different)\b.*\bGPA\b/i, response: 'The difference between two GPAs lies in their numerical values and may reflect variations in academic performance or grading scales.' },
+    { pattern: /\b(applied|applying|applicants)\b.*\bcollege\b/i, response: 'Considerations for college applicants include factors such as GPA, extracurricular activities, essays, and standardized test scores.' },
+    { pattern: /\b(accepted|admitted)\b.*\bcollege\b/i, response: 'Admission decisions are often based on holistic evaluations, considering factors such as GPA, test scores, extracurricular activities, and personal essays.' },
+    { pattern: /\b(graduation|graduate)\b/i, response: 'Graduation may require meeting minimum GPA requirements established by your educational institution.' },
+    { pattern: /\b(prestigious|competitive)\b.*\bcollege\b/i, response: 'Prestigious colleges often have competitive admissions processes where GPA plays a crucial role.' },
+    { pattern: /\b(transfer)\b.*\bcollege\b/i, response: 'Transferring to another institution typically requires meeting GPA requirements set by the new school.' },
+    { pattern: /\b(standardized|sat|act)\b.*\btest scores\b/i, response: 'Standardized test scores, such as SAT or ACT, are commonly considered alongside GPA in college admissions.' },
+    { pattern: /\b(importance|significant)\b.*\bGPA\b/i, response: 'GPA plays a significant role in college admissions and scholarship opportunities, reflecting academic performance.' },
+    { pattern: /\b(graduate|graduation|graduating)\b.*\bGPA\b/i, response: 'Graduating with a high GPA can enhance job prospects and pave the way for advanced education opportunities.' },
+    { pattern: /\b(scholarship|scholarships)\b/i, response: 'Many scholarships require a minimum GPA for eligibility, reflecting academic achievement.' },
+    { pattern: /\bGPA\b.*\bcalculator\b/i, response: 'Online GPA calculators offer tools to estimate GPA based on course grades and credit hours.' },
+    { pattern: /\b(honor|honors)\b.*\bGPA\b/i, response: 'Earning academic honors, such as deans list recognition, often requires a high GPA.' },
+    { pattern: /\b(credits|credit hours)\b.*\bGPA\b/i, response: 'Your GPA is calculated based on the grades earned in each class, weighted by the number of credit hours assigned to each course.' },
+    { pattern: /\bGPA\b.*\bscale\b/i, response: 'GPA scales can vary among institutions, but they typically range from 0 to 4.0 for unweighed and up to 5.0 for weighted.' },
+    { pattern: /\bGPA\b.*\bcumulative\b/i, response: 'Cumulative GPA reflects overall academic performance, considering grades earned in all courses taken.' },
+    { pattern: /\bGPA\b.*\b(impact|affect)\b.*\bjob\b/i, response: 'Your GPA may influence job opportunities, especially for recent graduates entering the job market.' },
+    { pattern: /\b(college|university)\b.*\brequirements\b/i, response: 'Review the GPA requirements for colleges or universities you plan to apply to.' },
+    { pattern: /\bGPA\b.*\bsemester\b/i, response: 'Your GPA may fluctuate from semester to semester based on your academic performance and course load.' },
+    { pattern: /\b(advice|tips|guidance)\b.*\bGPA\b/i, response: 'Seeking advice from academic advisors or mentors can provide valuable insights on improving your GPA.' },
+    { pattern: /\b(successful|effective)\b.*\bGPA\b.*\bstrategies\b/i, response: 'Implementing successful study strategies and time management techniques can contribute to a higher GPA.' },
+    { pattern: /\b(grade|grades)\b.*\bGPA\b.*\bimpact\b/i, response: 'Your GPA can have a significant impact on your overall academic performance and transcript.' },
+    { pattern: /\b(online|digital)\b.*\bGPA\b.*\bresources\b/i, response: 'Utilizing online resources and educational platforms can supplement your learning and improve your GPA.' },
+    { pattern: /\b(community|peer)\b.*\bGPA\b.*\bsupport\b/i, response: 'Engaging with a supportive community or study group can provide encouragement and motivation to maintain a high GPA.' },
+    { pattern: /\b(struggle|challenges)\b.*\bGPA\b.*\bimproving\b/i, response: 'Many students face challenges when improving their GPA, but consistent effort and determination can lead to progress.' },
+    { pattern: /\b(professor|instructor)\b.*\bGPA\b.*\bsuggestions\b/i, response: 'Reaching out to your professors or instructors for personalized feedback and suggestions can help you enhance your GPA.' },
+    { pattern: /\b(focus|concentration)\b.*\bGPA\b.*\benhancement\b/i, response: 'Improving your focus and concentration through mindfulness practices or study techniques can positively impact your GPA.' },
+    { pattern: /\b(competition|competitive)\b.*\bGPA\b.*\badvantage\b/i, response: 'Maintaining a high GPA can give you a competitive advantage when applying for scholarships, internships, or graduate programs.' },
+    { pattern: /\b(graduation|graduate)\b.*\bGPA\b.*\bachievement\b/i, response: 'Graduating with a high GPA is an achievement that reflects your dedication and hard work throughout your academic journey.' },
+    { pattern: /\b(academic|educational)\b.*\bGPA\b.*\bgoals\b/i, response: 'Setting specific academic goals and milestones can help you stay focused and motivated to achieve a higher GPA.' },
+    { pattern: /\b(self-discipline|motivation)\b.*\bGPA\b.*\bconsistency\b/i, response: 'Developing self-discipline and maintaining motivation are key factors in consistently achieving a high GPA.' },
+    { pattern: /\b(mental|emotional)\b.*\bGPA\b.*\bwell-being\b/i, response: 'Prioritizing your mental and emotional well-being is essential for maintaining a healthy balance and achieving success in your GPA.' },
+    { pattern: /\b(weighted)\b.*\bGPA\b/i, response: 'A weighted GPA takes into account the difficulty of your courses by assigning higher values to grades earned in honors, AP, or IB classes.' },
+    { pattern: /\b(unweighted)\b.*\bGPA\b/i, response: 'An unweighted GPA is based on a standard scale where all classes are given the same value regardless of their difficulty level.' },
+    { pattern: /\bGPA\b/i, response: 'GPA stands for Grade Point Average, a measure of academic performance in numerical value.' },
+];
+
+
+
+
+// Function to handle sending the message
+function sendMessage() {
+    var input = document.getElementById('user-input').value.toLowerCase();
+    var userMessage = document.createElement('div');
+    userMessage.textContent = input;
+    userMessage.classList.add('user');
+    document.getElementById('chat-box').appendChild(userMessage);
+
+    var response = 'Sorry, I did not understand your question. Could you please rephrase?';
+
+    // Check each pattern
+    for (var i = 0; i < patterns.length; i++) {
+        var match = input.match(patterns[i].pattern);
+        if (match) {
+            response = patterns[i].response;
+            break;
         }
     }
 
-    // Function to append a message to the chat box
-    function appendMessage(sender, message) {
-        const messageDiv = document.createElement("div");
-        messageDiv.textContent = message;
-        messageDiv.classList.add(sender);
-        chatBox.appendChild(messageDiv);
-        chatBox.scrollTop = chatBox.scrollHeight;
+    var botMessage = document.createElement('div');
+    botMessage.textContent = response;
+    botMessage.classList.add('bot');
+    document.getElementById('chat-box').appendChild(botMessage);
+
+    // Clear the input field after sending the message
+    document.getElementById('user-input').value = '';
+}
+
+// Add event listeners for clicking the send button
+document.getElementById('send-btn').addEventListener('click', sendMessage);
+
+// Add event listener for pressing Enter key
+document.getElementById('user-input').addEventListener('keypress', function(event) {
+    // Check if the Enter key was pressed
+    if (event.key === 'Enter') {
+        sendMessage(); // Call the sendMessage function when Enter is pressed
     }
-
-    // Function to get a response from the bot
-    async function getBotResponse(userMessage) {
-        // Define bot responses
-        const responses = {
-            "hello": "Hi there! I'm here to help you with your questions about the GPA calculator.",
-            "hi": "Hi there! I'm here to help you with your questions about the GPA calculator.",
-            "how does the gpa calculator work": "The GPA calculator allows you to calculate your grade point average (GPA) based on the grades and credits earned in your courses. Simply input your grades and credits, and the calculator will provide you with your GPA.",
-            "what is the purpose of the GPA calculator": "The purpose of the GPA calculator is to provide students with a convenient tool for calculating their GPA, both unweighted and weighted. It helps students track their academic progress and plan their future courses.",
-            "can I calculate both weighted and unweighted GPA": "Yes, you can calculate both weighted and unweighted GPA using this calculator. Weighted GPA takes into account the difficulty of the courses by assigning higher weights to honors or AP courses.",
-            // Add more responses as needed
-        };
-
-        // Check if user's message matches predefined questions
-        for (const keyword in responses) {
-            if (userMessage.toLowerCase().includes(keyword)) {
-                // If matched, append bot's response to the chat box
-                appendMessage("bot", responses[keyword]);
-                return; // Stop searching for matches
-            }
-        }
-
-        // If no predefined question matches, provide a default response
-        appendMessage("bot", "I'm sorry, I couldn't understand your question. Feel free to ask anything about the GPA calculator!");
-    }
-
-    // Event listeners for sending messages
-    sendBtn.addEventListener("click", sendMessage);
-    userInput.addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-            sendMessage();
-        }
-    });
 });

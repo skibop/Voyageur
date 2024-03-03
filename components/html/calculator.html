@@ -1,16 +1,22 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Set character encoding -->
   <meta charset="UTF-8">
+  <!-- Link to external stylesheet -->
   <link rel="stylesheet" href="/css/calculator.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
+    <!-- Logo -->
     <img src="/assets/clean.png" alt="Your Logo" class="logo">
+    <!-- Heading -->
     <h1>GPA Calculator</h1>
+    <!-- Navigation -->
     <nav>
       <ul class="navbar">
+        <!-- Navigation links -->
         <li><a href="/index.html" class="nav-link">Home</a></li>  
         <li><a href="/html/instructions.html" class="nav-link">Instructions</a></li>
         <li><a href="/html/Q&A.html" class="nav-link">Q&A</a></li>
@@ -19,15 +25,21 @@
   </header>
 
   <main>
+    <!-- Main section -->
     <section class="glass">
+      <!-- Calculator heading -->
       <h2>GPA Calculator</h2>
-      <a href="https://imgur.com/a/J7MQP8V" target="_blank" style="color: white; text-decoration: none;">
+      <!-- Link to grading scale with target blank to open in new tab -->
+      <a href="/assets/grading_scale.png" target="_blank" style="color: white; text-decoration: none;">
         <h4>Grading Scale</h4>
       </a>
+      <!-- Calculator content -->
       <div class="calculator-content">
+        <!-- Table for input fields -->
         <table>
           <thead>
             <tr>
+              <!-- Table headers -->
               <th>Class Name</th>
               <th>Grade</th>
               <th>Credits</th>
@@ -37,8 +49,10 @@
           </thead>
           <tbody>
             <tr>
+              <!-- Table row for input fields -->
               <td><input type="text" name="class_name[]" placeholder="Class Name" class="input-field"></td>
               <td>
+                <!-- Dropdown for grades -->
                 <select name="grade[]" class="select-field">
                   <option value="A">A</option>
                   <option value="A-">A-</option>
@@ -54,6 +68,7 @@
               </td>
               <td><input type="number" name="credits[]" placeholder="Credits" min="0" class="input-field"></td>
               <td>
+                <!-- Dropdown for class types -->
                 <select name="class_type[]" class="select-field">
                   <option value="standard">Standard</option>
                   <option value="honors">Honors</option>
@@ -64,10 +79,12 @@
             </tr>
           </tbody>
         </table>
+        <!-- Button group -->
         <div class="button-group">
           <button id="addRowBtn">Add Row</button>
           <button id="calculateBtn">Calculate GPA</button>
         </div>
+        <!-- GPA results -->
         <div class="gpa-results">
           <span class="weighted-gpa"><strong>Weighted GPA:</strong> <strong><span class="result-value">--</span></span></strong>
           <span class="unweighted-gpa"><strong>Unweighted GPA:</strong> <strong><span class="result-value">--</span></strong></span>
@@ -75,6 +92,8 @@
       </div>
     </section>
   </main>
+  <!-- Link to JavaScript file -->
   <script src="/scripts/calculator.js"></script>
 </body>
 </html>
+```

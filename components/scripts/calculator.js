@@ -39,24 +39,44 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Remove Row button functionality
-    document.addEventListener("click", function (event) {
+
+     // Remove Row button functionality
+     document.addEventListener("click", function (event) {
         if (event.target.classList.contains("removeRowBtn")) {
-            const row = event.target.closest("tr");
-            row.parentNode.removeChild(row);
+            const tableBody = document.querySelector("table tbody");
+            const numRows = tableBody.children.length;
+            if (numRows > 1) { // Ensure there's always at least one row
+                const row = event.target.closest("tr");
+                row.parentNode.removeChild(row);
+            }
         }
     });
 
     // Calculate GPA button functionality
+  // Calculate GPA button functionality
     const calculateBtn = document.getElementById("calculateBtn");
     calculateBtn.addEventListener("click", function () {
-        const grades = document.querySelectorAll("select[name='grade[]']");
-        const credits = document.querySelectorAll("input[name='credits[]']");
-        const classTypes = document.querySelectorAll("select[name='class_type[]']");
-        let weightedTotal = 0;
-        let unweightedTotal = 0;
-        let totalCredits = 0;
+      const grades = document.querySelectorAll("select[name='grade[]']");
+      const credits = document.querySelectorAll("input[name='credits[]']");
+      const classTypes = document.querySelectorAll("select[name='class_type[]']");
+      const classNames = document.querySelectorAll("input[name='class_name[]']");
 
+      // Check if any field is empty
+      for (let i = 0; i < grades.length; i++) {
+          if (
+              grades[i].value === "" ||
+              credits[i].value === "" ||
+              classTypes[i].value === "" ||
+              classNames[i].value === ""
+          ) {
+              alert("Please fill in all fields.");
+              return; // Exit the function if any field is empty
+          }
+      }
+
+      let weightedTotal = 0;
+      let unweightedTotal = 0;
+      let totalCredits = 0;
         // Iterate through Grades
         for (let i = 0; i < grades.length; i++) {
             const grade = grades[i].value;
@@ -70,6 +90,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             if (credit > 10) {
                 alert("Credits can not be above 10");
+                return;
+            } if (credit === 0) {
+                alert("Credits can not be equal to 0");
                 return;
             }
 
@@ -121,4 +144,44 @@ document.addEventListener("DOMContentLoaded", function () {
         weightedGPASpan.textContent = weightedGPA;
         unweightedGPASpan.textContent = unweightedGPA;
     });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Check if there is any stored data
+    const storedData = localStorage.getItem("gpaCalculatorData");
+    if (storedData) {
+        const parsedData = JSON.parse(storedData);
+        // Populate calculator fields with stored data
+        populateCalculator(parsedData);
+    }
+
+    // Function to populate calculator fields
+    function populateCalculator(data) {
+        // Populate input fields with stored data
+        // For example:
+        document.querySelector("input[name='class_name[]']").value = data.className;
+        document.querySelector("select[name='grade[]']").value = data.grade;
+        document.querySelector("input[name='credits[]']").value = data.credits;
+        document.querySelector("select[name='class_type[]']").value = data.classType;
+        // Populate other fields similarly
+    }
+
+    // Update stored data whenever inputs change
+    document.querySelectorAll("input[name='class_name[]'], select[name='grade[]'], input[name='credits[]'], select[name='class_type[]']").forEach(input => {
+        input.addEventListener("change", function () {
+            updateStoredData();
+        });
+    });
+
+    // Function to update stored data
+    function updateStoredData() {
+        const data = {
+            className: document.querySelector("input[name='class_name[]']").value,
+            grade: document.querySelector("select[name='grade[]']").value,
+            credits: document.querySelector("input[name='credits[]']").value,
+            classType: document.querySelector("select[name='class_type[]']").value
+            // Get other values similarly
+        };
+        localStorage.setItem("gpaCalculatorData", JSON.stringify(data));
+    }
 });

@@ -1,106 +1,116 @@
+/* Body Styles */
 body {
   font-family: 'Open Sans', sans-serif; /* Use Open Sans font for the entire document */
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to right, #4285f4, #b388ff); /* Blue to Light Purple */
-  color: #fff;
-  overflow: hidden;
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  background: linear-gradient(to right, #4285f4, #b388ff); /* Blue to Light Purple gradient background */
+  color: #fff; /* Set text color to white */
+  overflow: hidden; /* Add this line to remove the scrollbar */
 }
 
+/* Header Styles */
 header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-  backdrop-filter: blur(10px);
+  display: flex; /* Set display to flex */
+  flex-direction: column; /* Arrange items in column */
+  justify-content: center; /* Center align vertically */
+  align-items: center; /* Center align horizontally */
+  padding: 40px 20px; /* Padding */
+  backdrop-filter: blur(10px); /* Apply blur effect */
 }
 
+/* Heading Styles */
 h1 {
-  margin: 0;
-  color: #fff;
-  text-align: center;
-  font-size: 2em;
+  margin: 0; /* Remove default margin */
+  color: #fff; /* Set text color to white */
+  text-align: center; /* Center align text */
+  font-size: 2em; /* Set font size */
 }
 
+/* Navigation Styles */
 .navbar {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
+  display: flex; /* Set display to flex */
+  justify-content: center; /* Center align navigation links horizontally */
+  list-style: none; /* Remove default list style */
+  padding: 0; /* Remove default padding */
 }
 
 .nav-link {
-  text-decoration: none;
-  color: #fff;
-  padding: 10px 20px;
-  margin: 0 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  text-decoration: none; /* Remove underline from links */
+  color: #fff; /* Set text color to white */
+  padding: 10px 20px; /* Padding */
+  margin: 0 10px; /* Margin */
+  border-radius: 5px; /* Add border radius */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
 }
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2); /* Lighten background color on hover */
 }
 
+/* Main Styles */
 main {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
+  max-width: 800px; /* Set maximum width */
+  margin: 20px auto; /* Center align with auto margins */
+  padding: 20px; /* Padding */
 }
 
+/* Section Styles */
 section {
-  margin-bottom: 20px;
-  padding: 20px;
-  border-radius: 10px;
-  backdrop-filter: blur(10px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  margin-bottom: 20px; /* Add margin bottom */
+  padding: 20px; /* Padding */
+  border-radius: 10px; /* Add border radius */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth transition for transform, box-shadow, and background-color */
 }
 
+/* Glass Effect Styles */
 .glass {
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.2); /* Semi-transparent background */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Box shadow */
 }
 
 .glass:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.5);
-  background: rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px); /* Move up slightly on hover */
+  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.5); /* Change box shadow on hover */
+  background: rgba(0, 0, 0, 0.3); /* Change background color on hover */
 }
 
+/* Footer Styles */
 footer {
-  text-align: center;
-  padding: 10px;
+  text-align: center; /* Center align text */
+  padding: 10px; /* Padding */
 }
 
+/* Logo Styles */
 .logo {
-  max-width: 400px;
-  max-height: 400px; 
-  width: auto;
-  height: auto;
-  position: absolute; 
-  top: -110px; 
-  left: -90px;
+  max-width: 400px; /* Set maximum width */
+  max-height: 400px; /* Set maximum height */
+  width: auto; /* Maintain aspect ratio */
+  height: auto; /* Maintain aspect ratio */
+  position: absolute; /* Set position to absolute */
+  top: -110px; /* Position from top */
+  left: -90px; /* Position from left */
 }
 
+/* Instruction List Styles */
 .instruction-list {
-  font-size: 1.2em;
-  list-style-type: none;
+  font-size: 1.2em; /* Set font size */
+  list-style-type: none; /* Remove default list style */
 }
 
 .instruction-list li {
-  font-size: 1.1em;
-  margin-bottom: 20px;
-  position: relative;
+  font-size: 1.1em; /* Set font size */
+  margin-bottom: 20px; /* Add margin bottom */
+  position: relative; /* Set position to relative */
 }
 
 .instruction-list li:before {
-  content: "\2022";
-  color: #fff;
-  font-weight: bold;
-  display: inline-block;
-  width: 1em;
-  position: absolute;
-  left: -1.5em;
-  top: 0.1em;
+  content: "\2022"; /* Unicode bullet character */
+  color: #fff; /* Set text color to white */
+  font-weight: bold; /* Set font weight to bold */
+  display: inline-block; /* Set display to inline-block */
+  width: 1em; /* Set width */
+  position: absolute; /* Set position to absolute */
+  left: -1.5em; /* Position from left */
+  top: 0.1em; /* Position from top */
 }

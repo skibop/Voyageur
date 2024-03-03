@@ -1,164 +1,177 @@
+/* CSS Styles for HTML Document */
+
+/* Body Styles */
 body {
-  font-family: 'Open Sans', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to right, #4285f4, #b388ff); /* Blue to Light Purple */
-  color: #fff;
+  font-family: 'Open Sans', sans-serif; /* Set font family */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  background: linear-gradient(to right, #4285f4, #b388ff); /* Blue to Light Purple gradient background */
+  color: #fff; /* Set text color to white */
   overflow: hidden; /* Add this line to remove the scrollbar */
 }
 
+/* Header Styles */
 header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-  backdrop-filter: blur(10px);
+  display: flex; /* Set display to flex */
+  flex-direction: column; /* Set flex direction to column */
+  justify-content: center; /* Center align content vertically */
+  align-items: center; /* Center align content horizontally */
+  padding: 40px 20px; /* Padding */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  position: relative;
 }
 
+/* Heading Styles */
 h1 {
-  margin: 0;
-  color: #fff;
-  text-align: center;
+  margin: 0; /* Remove default margin */
+  color: #fff; /* Set text color to white */
+  text-align: center; /* Center align text */
 }
 
+/* Navigation Styles */
 .navbar {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
+  display: flex; /* Set display to flex */
+  justify-content: center; /* Center align navigation links horizontally */
+  list-style: none; /* Remove default list style */
+  padding: 0; /* Remove default padding */
 }
 
 .nav-link {
-  text-decoration: none;
-  color: #fff;
-  padding: 10px 20px;
-  margin: 0 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+  text-decoration: none; /* Remove underline from links */
+  color: #fff; /* Set text color to white */
+  padding: 10px 20px; /* Padding */
+  margin: 0 10px; /* Margin */
+  border-radius: 5px; /* Add border radius */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
 }
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2); /* Lighten background color on hover */
 }
 
+/* Main Styles */
 main {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 20px;
+  max-width: 800px; /* Set maximum width */
+  margin: 20px auto; /* Center align with auto margins */
+  padding: 20px; /* Padding */
 }
 
+/* Section Styles */
 section {
-  margin-bottom: 20px;
-  padding: 20px;
-  border-radius: 10px;
-  backdrop-filter: blur(10px);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  margin-bottom: 20px; /* Add margin bottom */
+  padding: 20px; /* Padding */
+  border-radius: 10px; /* Add border radius */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth transitions */
 }
 
+/* Glass Effect Styles */
 .glass {
-  background: rgba(0, 0, 0, 0.2); /* Adjust the opacity to lighten the background */
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Adjust the opacity of the shadow */
+  background: rgba(0, 0, 0, 0.2); /* Semi-transparent background */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Box shadow */
 }
 
 .glass:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.5); /* Lighten the shadow on hover */
-  background: rgba(0, 0, 0, 0.3); /* Lighten the background color on hover */
+  transform: translateY(-5px); /* Move up on hover */
+  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.5); /* Larger shadow on hover */
+  background: rgba(0, 0, 0, 0.3); /* Lighten background on hover */
 }
 
+/* Footer Styles */
 footer {
-  text-align: center;
-  padding: 10px;
+  text-align: center; /* Center align text */
+  padding: 10px; /* Padding */
 }
 
+/* Image Container Styles */
 .image-container {
-  display: flex;
-  justify-content: center;
+  display: flex; /* Set display to flex */
+  justify-content: center; /* Center align content horizontally */
 }
 
 .image-container img {
-  max-width: 100%; /* Ensures the image doesn't exceed its container */
-  display: block; /* Removes any default inline alignment */
-  margin: 0 auto; /* Centers the image horizontally */
+  max-width: 100%; /* Set maximum width */
+  display: block; /* Display as block element */
+  margin: 0 auto; /* Center align image horizontally */
 }
 
+/* Profile Content Styles */
 .profile-content {
-  display: flex;
-  align-items: center;
+  display: flex; /* Set display to flex */
+  align-items: center; /* Align items vertically */
 }
 
 .image-container {
-  margin-right: 20px; /* Add some space between image and text */
+  margin-right: 20px; /* Add margin right */
 }
 
 .image-container img {
-  max-width: 100%; /* Ensures the image doesn't exceed its container */
-  display: block; /* Removes any default inline alignment */
+  max-width: 100%; /* Set maximum width */
+  display: block; /* Display as block element */
 }
 
 .text-content {
   flex: 1; /* Allow text content to take remaining space */
 }
 
-/* Modal styles */
+/* Modal Styles */
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  display: none; /* Hide modal by default */
+  position: fixed; /* Set position to fixed */
+  z-index: 9999; /* Set z-index */
+  left: 0; /* Position from left edge */
+  top: 0; /* Position from top edge */
+  width: 100%; /* Set width to full */
+  height: 100%; /* Set height to full */
   background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
-  backdrop-filter: blur(5px); /* Blur effect */
-  text-align: center;
+  backdrop-filter: blur(5px); /* Apply blur effect */
+  text-align: center; /* Center align text */
 }
 
 .modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 80%;
-  max-height: 80%;
+  position: absolute; /* Set position to absolute */
+  top: 50%; /* Position from top edge */
+  left: 50%; /* Position from left edge */
+  transform: translate(-50%, -50%); /* Center align horizontally and vertically */
+  max-width: 80%; /* Set maximum width */
+  max-height: 80%; /* Set maximum height */
 }
 
 #modal-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+  max-width: 100%; /* Set maximum width */
+  max-height: 100%; /* Set maximum height */
+  object-fit: contain; /* Ensure image fits inside container */
 }
 
+/* Close Button Styles */
 .close {
-  color: #fff;
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 35px;
-  font-weight: bold;
-  cursor: pointer;
+  color: #fff; /* Set text color to white */
+  position: absolute; /* Set position to absolute */
+  top: 10px; /* Position from top edge */
+  right: 20px; /* Position from right edge */
+  font-size: 35px; /* Set font size */
+  font-weight: bold; /* Set font weight */
+  cursor: pointer; /* Set cursor to pointer */
 }
 
+/* Blur Effect Styles */
 .blur {
-  filter: blur(5px); /* Adjust the blur level as needed */
+  filter: blur(5px); /* Apply blur effect */
   transition: filter 0.3s ease; /* Smooth transition for the blur effect */
 }
 
-header {
-  position: relative;
-}
 
+/* Logo Styles */
 .logo {
-  max-width: 400px; /* Adjust this to change the maximum width of the logo */
-  max-height: 400px; /* Adjust this to change the maximum height of the logo */
-  width: auto; /* This will keep the aspect ratio of the logo intact */
-  height: auto; /* This will keep the aspect ratio of the logo intact */
-  position: absolute; /* This will take the logo out of the normal document flow */
-  top: -110px; /* This will position the logo 20px from the top of the page */
-  left: -90px; /* This will position the logo 20px from the left of the page */
+  max-width: 400px; /* Set maximum width */
+  max-height: 400px; /* Set maximum height */
+  width: auto; /* Maintain aspect ratio */
+  height: auto; /* Maintain aspect ratio */
+  position: absolute; /* Set position to absolute */
+  top: -110px; /* Position from top */
+  left: -90px; /* Position from left */
 }
 
 .text-content h1 {
-  margin-bottom: 20px; /* Add space below each line */
+  margin-bottom: 20px; /* Add margin bottom to h1 elements inside .text-content */
 }

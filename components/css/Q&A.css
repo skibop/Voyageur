@@ -1,122 +1,134 @@
+/* Body Styles */
 body {
-    font-family: 'Open Sans', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to right, #4285f4, #b388ff);
-    color: #fff;
-    overflow: hidden;
-  }
-  
-  header {
-    text-align: center;
-    padding: 40px 0;
-  }
-  
-  h1 {
-    margin: 0;
-  }
-  
-  main {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-  }
-  
-  section {
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-  }
-  
-  .glass {
-    background: rgba(0, 0, 0, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-  }
-  
-  footer {
-    text-align: center;
-    padding: 10px;
-  }
-  
-  input[type="text"] {
-    width: calc(100% - 80px);
-    padding: 10px;
-    margin-right: 10px;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #fff;
-    color: #4285f4;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: rgba(255, 255, 255, 0.8);
-  }
-  
-  #chat-box {
-    max-height: 300px;
-    overflow-y: auto;
-  }
-  
-  #chat-box div {
-    margin-bottom: 10px;
-  }
-  
-  #chat-box .user {
-    text-align: right;
-  }
-  
-  #chat-box .bot {
-    text-align: left;
-  }
-  
-  .input-container {
-    display: flex;
-    margin-top: 20px;
-  }
-  
-  input[type="text"] {
-    flex: 1;
-  }
-  
-  button {
-    margin-left: 10px;
-  }
-  
-  .navbar {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    padding: 0;
-  }
-  
-  .nav-link {
-    text-decoration: none;
-    color: #fff;
-    padding: 10px 20px;
-    margin: 0 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  .logo {
-    max-width: 400px;
-    max-height: 400px;
-    width: auto;
-    height: auto;
-    position: absolute;
-    top: -110px;
-    left: -90px;
-  }
-  
+  font-family: 'Open Sans', sans-serif; /* Set font family */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  background: linear-gradient(to right, #4285f4, #b388ff); /* Blue to Light Purple gradient background */
+  color: #fff; /* Set text color to white */
+  overflow: hidden; /* Add this line to remove the scrollbar */
+}
+
+/* Header Styles */
+header {
+  text-align: center; /* Center align text */
+  padding: 40px 0; /* Padding */
+}
+
+/* Heading Styles */
+h1 {
+  margin: 0; /* Remove default margin */
+}
+
+/* Main Styles */
+main {
+  max-width: 800px; /* Set maximum width */
+  margin: 20px auto; /* Center align with auto margins */
+  padding: 20px; /* Padding */
+}
+
+/* Section Styles */
+section {
+  margin-bottom: 20px; /* Add margin bottom */
+  padding: 20px; /* Padding */
+  border-radius: 10px; /* Add border radius */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+}
+
+/* Glass Effect Styles */
+.glass {
+  background: rgba(0, 0, 0, 0.2); /* Semi-transparent background */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Box shadow */
+}
+
+/* Footer Styles */
+footer {
+  text-align: center; /* Center align text */
+  padding: 10px; /* Padding */
+}
+
+/* Input Styles */
+input[type="text"] {
+  width: calc(100% - 80px); /* Calculate input width */
+  padding: 10px; /* Padding */
+  margin-right: 10px; /* Margin right */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Add border radius */
+}
+
+/* Button Styles */
+button {
+  padding: 10px 20px; /* Padding */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Add border radius */
+  background-color: #fff; /* Set background color to white */
+  color: #4285f4; /* Set text color to blue */
+  cursor: pointer; /* Set cursor to pointer */
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.8); /* Lighten background color on hover */
+}
+
+/* Chat Box Styles */
+#chat-box {
+  max-height: 300px; /* Set maximum height */
+  overflow-y: auto; /* Enable vertical scroll */
+}
+
+#chat-box div {
+  margin-bottom: 10px; /* Add margin bottom */
+}
+
+#chat-box .user {
+  text-align: right; /* Align user messages to the right */
+}
+
+#chat-box .bot {
+  text-align: left; /* Align bot messages to the left */
+}
+
+/* Input Container Styles */
+.input-container {
+  display: flex; /* Set display to flex */
+  margin-top: 20px; /* Add margin top */
+}
+
+input[type="text"] {
+  flex: 1; /* Allow input field to take remaining space */
+}
+
+button {
+  margin-left: 10px; /* Add margin left */
+}
+
+/* Navigation Styles */
+.navbar {
+  display: flex; /* Set display to flex */
+  justify-content: center; /* Center align navigation links horizontally */
+  list-style: none; /* Remove default list style */
+  padding: 0; /* Remove default padding */
+}
+
+.nav-link {
+  text-decoration: none; /* Remove underline from links */
+  color: #fff; /* Set text color to white */
+  padding: 10px 20px; /* Padding */
+  margin: 0 10px; /* Margin */
+  border-radius: 5px; /* Add border radius */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Lighten background color on hover */
+}
+
+/* Logo Styles */
+.logo {
+  max-width: 400px; /* Set maximum width */
+  max-height: 400px; /* Set maximum height */
+  width: auto; /* Maintain aspect ratio */
+  height: auto; /* Maintain aspect ratio */
+  position: absolute; /* Set position to absolute */
+  top: -110px; /* Position from top */
+  left: -90px; /* Position from left */
+}
