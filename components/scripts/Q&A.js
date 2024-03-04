@@ -51,7 +51,8 @@ var patterns = [
 // Function to handle sending the message
 function sendMessage() {
     var input = document.getElementById('user-input').value;
-    input = input.toLowerCase() + input.toUpperCase();
+    // Convert the input to lowercase before checking patterns
+    input = input.toLowerCase();
     var userMessage = document.createElement('div');
     userMessage.textContent = input;
     userMessage.classList.add('user');
