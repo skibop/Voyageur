@@ -50,7 +50,8 @@ var patterns = [
 
 // Function to handle sending the message
 function sendMessage() {
-    var input = document.getElementById('user-input').value.toLowerCase();
+    var input = document.getElementById('user-input').value;
+    input = input.toLowerCase() + input.toUpperCase();
     var userMessage = document.createElement('div');
     userMessage.textContent = input;
     userMessage.classList.add('user');
