@@ -66,5 +66,5 @@ app.get('/profile', (req, res) => req.session.user ? res.sendFile(path.join(__di
 app.get('/get-user-data', (req, res) => req.session.user ? res.json(req.session.user) : res.status(401).send('Not logged in'));
 
 // Start server
-const port = process.env.PORT; // Port number from environment variables
+const port = process.env.PORT || 80 || 8080; // Port number from environment variables
 app.listen(port, () => console.log(`Server is running on http://localhost:${port}/login`)); // Start the Express server and log the URL

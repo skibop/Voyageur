@@ -173,8 +173,8 @@ document.addEventListener("DOMContentLoaded", function () {
             unweightedTotal += gradePoints * credit;
         }
 
-        const weightedGPA = (weightedTotal / totalCredits).toFixed(15).replace(/\.?0+$/, '');
-        const unweightedGPA = (unweightedTotal / totalCredits).toFixed(15).replace(/\.?0+$/, '');
+        const weightedGPA = (weightedTotal / totalCredits).toFixed(4).replace(/\.?0+$/, '');
+        const unweightedGPA = (unweightedTotal / totalCredits).toFixed(4).replace(/\.?0+$/, '');
 
         const weightedGPASpan = document.querySelector(".weighted-gpa .result-value");
         const unweightedGPASpan = document.querySelector(".unweighted-gpa .result-value");
