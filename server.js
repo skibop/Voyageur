@@ -11,7 +11,11 @@ const app = express(); // Create an instance of Express
 
 // Middleware
 // Serve static files from the 'components' directory
-app.use(express.static(path.join(__dirname, 'components')));
+app.use(express.static(path.join(__dirname, 'components'), {
+  setHeaders: function (res, path, stat) {
+    res.set('Access-Control-Allow-Origin', '*');
+  }
+}));
 // Parse URL-encoded and JSON request bodies
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

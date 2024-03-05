@@ -82,10 +82,11 @@
         <div class="button-group">
           <button id="addRowBtn">Add Row</button>
           <button id="calculateBtn">Calculate GPA</button>
+          <button id="exportPdfBtn">Export PDF</button> <!-- Export PDF button -->
         </div>
         <!-- GPA results -->
         <div class="gpa-results">
-          <span class="weighted-gpa"><strong>Weighted GPA:</strong> <strong><span class="result-value">--</span></span></strong>
+          <span class="weighted-gpa"><strong>Weighted GPA:</strong> <strong><span class="result-value">--</span></strong></span>
           <span class="unweighted-gpa"><strong>Unweighted GPA:</strong> <strong><span class="result-value">--</span></strong></span>
         </div>
       </div>
@@ -93,5 +94,7 @@
   </main>
   <!-- Link to JavaScript file -->
   <script src="/scripts/calculator.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
 </body>
 </html>

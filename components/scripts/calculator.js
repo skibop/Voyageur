@@ -260,4 +260,20 @@ document.addEventListener("DOMContentLoaded", function () {
             saveDataToCookies();
         });
     });
+
+    document.getElementById('exportPdfBtn').addEventListener('click', function() {
+        domtoimage.toPng(document.body)
+            .then(function (dataUrl) {
+                var img = new Image();
+                img.src = dataUrl;
+                img.onload = function() {
+                    var doc = new jsPDF('l', 'mm', [img.width, img.height]);
+                    doc.addImage(dataUrl, 'PNG', 0, 0, img.width, img.height);
+                    doc.save('sample.pdf');
+                };
+            })
+            .catch(function (error) {
+                console.error('Error capturing screenshot:', error);
+            });
+    });
 });
