@@ -1,12 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const MAX_ROWS = 8;
-
-    // Function to add a new row
-    function addNewRow() {
-        const tableBody = document.querySelector("table tbody");
-        const numRows = tableBody.children.length;
-        if (numRows < MAX_ROWS) {
-            const newRow = `
+const newRow = `
                 <tr>
                     <td><input type="text" name="class_name[]" placeholder="Class Name" class="input-field"></td>
                     <td>
@@ -34,6 +26,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     <td><button class="removeRowBtn">&times;</button></td> <!-- Replace "Remove Row" text with &times; for X -->
                 </tr>
             `;
+
+document.addEventListener("DOMContentLoaded", function () {
+    const MAX_ROWS = 8;
+
+    // Function to add a new row
+    function addNewRow() {
+        const tableBody = document.querySelector("table tbody");
+        const numRows = tableBody.children.length;
+        if (numRows < MAX_ROWS) {
             tableBody.insertAdjacentHTML("beforeend", newRow);
             // Save data to cookies after adding a new row
             saveDataToCookies();
@@ -43,34 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Function to add the default row
     function addDefaultRow() {
         const tableBody = document.querySelector("table tbody");
-        const newRow = `
-            <tr>
-                <td><input type="text" name="class_name[]" placeholder="Class Name" class="input-field"></td>
-                <td>
-                    <select name="grade[]" class="select-field">
-                        <option value="A">A</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B">B</option>
-                        <option value="B-">B-</option>
-                        <option value="C+">C+</option>
-                        <option value="C">C</option>
-                        <option value="C-">C-</option>
-                        <option value="D">D</option>
-                        <option value="F">F</option>
-                    </select>
-                </td>
-                <td><input type="number" name="credits[]" placeholder="Credits" min="0" max="10" class="input-field"></td>
-                <td>
-                    <select name="class_type[]" class="select-field">
-                        <option value="standard">Standard</option>
-                        <option value="honors">Honors</option>
-                        <option value="ap">AP/College-Level</option>
-                    </select>
-                </td>
-                <td><button class="removeRowBtn">&times;</button></td> <!-- Replace "Remove Row" text with &times; for X -->
-            </tr>
-        `;
         tableBody.insertAdjacentHTML("beforeend", newRow);
     }
 
