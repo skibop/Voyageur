@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 img.onload = function() {
                     var doc = new jsPDF('l', 'mm', [img.width, img.height]);
                     doc.addImage(dataUrl, 'PNG', 0, 0, img.width, img.height);
-                    doc.save('sample.pdf');
+                    doc.save('VoyageurGPA.pdf');
                 };
             })
             .catch(function (error) {
