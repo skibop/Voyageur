@@ -110,6 +110,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Please fill in all fields.");
                 return; // Exit the function if any field is empty
             }
+            if (!validateClassName(classNames[i].value)) {
+                alert("Please make sure to use only alphanumeric characters, spaces, and periods.");
+                return;
+            }
         }
 
         let weightedTotal = 0;
@@ -121,16 +125,15 @@ document.addEventListener("DOMContentLoaded", function () {
             const credit = parseFloat(credits[i].value);
             const classType = classTypes[i].value;
 
-            // Validate Credits
-            if (credit < 0) {
-                alert("Credits cannot be negative.");
-                return;
-            }
-            if (credit > 10) {
-                alert("Credits can not be above 10");
-                return;
-            } if (credit === 0) {
-                alert("Credits can not be equal to 0");
+        // Validate Credits
+            if (credit < 0 || credit > 10 || credit === 0) {
+                if (credit < 0) {
+                    alert("Credits cannot be negative.");
+                } else if (credit > 10) {
+                    alert("Credits cannot be above 10.");
+                } else {
+                    alert("Credits cannot be equal to 0.");
+                }
                 return;
             }
 
@@ -184,6 +187,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         saveDataToCookies();
     });
+
+    function validateClassName(className) {
+        // Class name should not be empty and should only contain alphanumeric characters, spaces, and periods
+        return className.trim() !== "" && /^[a-zA-Z0-9\s.]+$/.test(className);
+    }
 
     // Function to save data to cookies
     function saveDataToCookies() {
