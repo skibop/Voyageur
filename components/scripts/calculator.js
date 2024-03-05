@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <option value="F">F</option>
                         </select>
                     </td>
-                    <td><input type="number" name="credits[]" placeholder="Credits" min="0" class="input-field"></td>
+                    <td><input type="number" name="credits[]" placeholder="Credits" min="0" max="10" class="input-field"></td>
                     <td>
                         <select name="class_type[]" class="select-field">
                             <option value="standard">Standard</option>
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <option value="F">F</option>
                     </select>
                 </td>
-                <td><input type="number" name="credits[]" placeholder="Credits" min="0" class="input-field"></td>
+                <td><input type="number" name="credits[]" placeholder="Credits" min="0" max="10" class="input-field"></td>
                 <td>
                     <select name="class_type[]" class="select-field">
                         <option value="standard">Standard</option>
