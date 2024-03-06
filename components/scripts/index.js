@@ -3,6 +3,7 @@ class TimeManager {
     this.timeElement = document.getElementById('current-time');
     this.dateElement = document.getElementById('current-date');
     this.modal = document.getElementById('modal');
+    this.closeModalBtn = document.querySelector('#modal .close');
   }
 
   updateTime() {
@@ -28,11 +29,15 @@ class TimeManager {
   openModal() {
     this.modal.style.display = 'block';
     this.applyBlur();
+    // Add event listener to close modal when clicking on X button
+    this.closeModalBtn.addEventListener('click', () => this.closeModal());
   }
 
   closeModal() {
     this.modal.style.display = 'none';
     this.removeBlur();
+    // Remove event listener for closing modal when it's closed
+    this.closeModalBtn.removeEventListener('click', () => this.closeModal());
   }
 }
 
