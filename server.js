@@ -1,13 +1,10 @@
-/*
-  The App class initializes and configures an Express.js server to handle various routes and requests.
-*/
-
 // Import required modules
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
+const colors = require('colors');
 require('dotenv').config({ path: './components/key.env' });
 
 class App {
@@ -75,12 +72,14 @@ class App {
         .findOne(req.body);
       if (user) {
         req.session.user = user;
+        console.log(colors.green('Login successful')); // Log successful login in green
         res.redirect('/profile');
       } else {
+        console.error(colors.red('Invalid credentials')); // Log error message in red
         res.status(401).send('Invalid credentials');
       }
     } catch (error) {
-      console.error('Error connecting to the database:', error.message);
+      console.error(colors.red('Error connecting to the database:'), error.message);
       res.status(500).send('Internal Server Error');
     } finally {
       await client.close();
@@ -99,7 +98,7 @@ class App {
 
   // Start the Express server
   start() {
-    this.app.listen(this.port, () => console.log(`Server is running on http://localhost:${this.port}/login`));
+    this.app.listen(this.port, () => console.log(colors.red(`Server is running on http://localhost:${this.port}/login`)));
   }
 }
 
