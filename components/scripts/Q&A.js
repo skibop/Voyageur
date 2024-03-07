@@ -1,5 +1,10 @@
+/*
+  The ChatBot class handles user inquiries and provides responses based on predefined patterns.
+*/
+
 class ChatBot {
     constructor() {
+        // Predefined patterns and responses
         this.patterns = [
             { pattern: /\b(calculate|computing|how to calculate)\b.*\bGPA\b/i, response: 'To calculate GPA, you need to perform a series of mathematical operations.' },
             { pattern: /\b(mean|meaning)\b.*\bGPA\b/i, response: 'GPA stands for Grade Point Average, a measure of academic performance in numerical value.' },
@@ -46,8 +51,9 @@ class ChatBot {
         ];
     }
 
+    // Process user input and generate appropriate response
     sendMessage(input) {
-        // Convert the input to lowercase before checking patterns
+        // Convert input to lowercase before checking patterns
         input = input.toLowerCase();
         let response = 'Sorry, I did not understand your question. Could you please rephrase?';
 
@@ -64,25 +70,28 @@ class ChatBot {
     }
 }
 
-// ChatBot instance
+// Create an instance of ChatBot
 const chatBot = new ChatBot();
 
-// Function to handle sending the message
+// Function to handle sending messages
 function handleMessage() {
     const input = document.getElementById('user-input').value;
-    // Check if input contains non-alphanumeric characters
+    // Check for non-alphanumeric characters in the input
     if (/[^a-z0-9\s.?]/i.test(input)) {
         alert('Please only use alphanumeric characters, question marks, and decimal numbers.');
         return; // Prevent further execution
     }
 
+    // Create and display user message
     const userMessage = document.createElement('div');
     userMessage.textContent = input;
     userMessage.classList.add('user');
     document.getElementById('chat-box').appendChild(userMessage);
 
+    // Get response from ChatBot
     const response = chatBot.sendMessage(input);
 
+    // Create and display bot message
     const botMessage = document.createElement('div');
     botMessage.textContent = response;
     botMessage.classList.add('bot');
@@ -92,7 +101,7 @@ function handleMessage() {
     document.getElementById('user-input').value = '';
 }
 
-// Add event listeners for clicking the send button
+// Add event listener for clicking the send button
 document.getElementById('send-btn').addEventListener('click', handleMessage);
 
 // Add event listener for pressing Enter key
