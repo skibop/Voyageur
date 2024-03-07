@@ -1,83 +1,86 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const MAX_ROWS = 8;
+class GPACalculator {
+    constructor() {
+        this.MAX_ROWS = 8;
+        this.newRow = `
+            <tr>
+                <td><input type="text" name="class_name[]" placeholder="Class Name" class="input-field"></td>
+                <td>
+                    <select name="grade[]" class="select-field">
+                        <option value="A">A</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B">B</option>
+                        <option value="B-">B-</option>
+                        <option value="C+">C+</option>
+                        <option value="C">C</option>
+                        <option value="C-">C-</option>
+                        <option value="D">D</option>
+                        <option value="F">F</option>
+                    </select>
+                </td>
+                <td><input type="number" name="credits[]" placeholder="Credits" min="0" max="10" class="input-field"></td>
+                <td>
+                    <select name="class_type[]" class="select-field">
+                        <option value="standard">Standard</option>
+                        <option value="honors">Honors</option>
+                        <option value="ap">AP/College-Level</option>
+                    </select>
+                </td>
+                <td><button class="removeRowBtn">&times;</button></td>
+            </tr>
+        `;
+        document.addEventListener("DOMContentLoaded", () => {
+            this.init();
+        });
+    }
 
-    const newRow = `
-        <tr>
-            <td><input type="text" name="class_name[]" placeholder="Class Name" class="input-field"></td>
-            <td>
-                <select name="grade[]" class="select-field">
-                    <option value="A">A</option>
-                    <option value="A-">A-</option>
-                    <option value="B+">B+</option>
-                    <option value="B">B</option>
-                    <option value="B-">B-</option>
-                    <option value="C+">C+</option>
-                    <option value="C">C</option>
-                    <option value="C-">C-</option>
-                    <option value="D">D</option>
-                    <option value="F">F</option>
-                </select>
-            </td>
-            <td><input type="number" name="credits[]" placeholder="Credits" min="0" max="10" class="input-field"></td>
-            <td>
-                <select name="class_type[]" class="select-field">
-                    <option value="standard">Standard</option>
-                    <option value="honors">Honors</option>
-                    <option value="ap">AP/College-Level</option>
-                </select>
-            </td>
-            <td><button class="removeRowBtn">&times;</button></td> <!-- Replace "Remove Row" text with &times; for X -->
-        </tr>
-    `;
+    init() {
+        const addRowBtn = document.getElementById("addRowBtn");
+        addRowBtn.addEventListener("click", () => this.addNewRow());
 
-    function addNewRow() {
+        document.addEventListener("click", (event) => {
+            if (event.target.classList.contains("removeRowBtn")) {
+                this.removeRow(event);
+            }
+        });
+
+        const calculateBtn = document.getElementById("calculateBtn");
+        calculateBtn.addEventListener("click", () => this.calculateGPA());
+
+        document.getElementById('exportPdfBtn').addEventListener('click', () => this.exportPDF());
+
+        this.populateDataFromCookies();
+        this.updateStoredDataInCookies();
+    }
+
+    addNewRow() {
         const tableBody = document.querySelector("table tbody");
         const numRows = tableBody.children.length;
-        if (numRows < MAX_ROWS) {
-            tableBody.insertAdjacentHTML("beforeend", newRow);
-            saveDataToCookies();
+        if (numRows < this.MAX_ROWS) {
+            tableBody.insertAdjacentHTML("beforeend", this.newRow);
+            this.saveDataToCookies(); // Save data after adding the new row
         }
     }
 
-    function handleButtonClick(event) {
-        if (event.target.classList.contains("removeRowBtn")) {
-            const tableBody = document.querySelector("table tbody");
-            const numRows = tableBody.children.length;
-            if (numRows > 1) { 
-                const row = event.target.closest("tr");
-                row.parentNode.removeChild(row);
-                saveDataToCookies();
-            }
+    removeRow(event) {
+        const tableBody = document.querySelector("table tbody");
+        const numRows = tableBody.children.length;
+        if (numRows > 1) {
+            const row = event.target.closest("tr");
+            row.parentNode.removeChild(row);
+            this.saveDataToCookies();
         }
     }
 
-    function calculateGPA() {
+    calculateGPA() {
         const grades = document.querySelectorAll("select[name='grade[]']");
         const credits = document.querySelectorAll("input[name='credits[]']");
         const classTypes = document.querySelectorAll("select[name='class_type[]']");
-        const classNames = document.querySelectorAll("input[name='class_name[]']");
-    
-        // Check if any field is empty
-        for (let i = 0; i < grades.length; i++) {
-            if (
-                grades[i].value === "" ||
-                credits[i].value === "" ||
-                classTypes[i].value === "" ||
-                classNames[i].value === ""
-            ) {
-                alert("Please fill in all fields.");
-                return; // Exit the function if any field is empty
-            }
-            if (!validateClassName(classNames[i].value)) {
-                alert("Please make sure to use only alphanumeric characters, spaces, and periods.");
-                return;
-            }
-        }
     
         let weightedTotal = 0;
         let unweightedTotal = 0;
         let totalCredits = 0;
-        // Iterate through Grades
+    
         for (let i = 0; i < grades.length; i++) {
             const grade = grades[i].value;
             const credit = parseFloat(credits[i].value);
@@ -95,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
     
-            // Defining the grade values for Standard
             let gradePoints;
             switch (grade) {
                 case "A": gradePoints = 4.00; break;
@@ -108,29 +110,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 case "C-": gradePoints = 1.67; break;
                 case "D": gradePoints = 1.00; break;
                 case "F": gradePoints = 0; break;
-                default: gradePoints = 0; // Default case for unknown grades
+                default: gradePoints = 0;
             }
     
             let weightedGradePoints;
-            // For D or F grades, don't add extra points for honors or AP classes
             if (grade === "D" || grade === "F") {
                 weightedGradePoints = gradePoints;
             } else {
                 weightedGradePoints = gradePoints;
-                // For weighted GPA, add additional points for honors and AP classes
                 if (classType === "honors") {
-                    weightedGradePoints += 0.5; // Add 0.5 to the grade points for honors classes
+                    weightedGradePoints += 0.5;
                 } else if (classType === "ap") {
-                    weightedGradePoints += 1.0; // Add 1.0 to the grade points for AP/college-level classes
+                    weightedGradePoints += 1.0;
                 }
             }
     
-            // Calculation of Quality Points
             const qualityPoints = weightedGradePoints * credit;
             totalCredits += credit;
             weightedTotal += qualityPoints;
-    
-            // For unweighted GPA, use actual grade points
             unweightedTotal += gradePoints * credit;
         }
     
@@ -143,10 +140,10 @@ document.addEventListener("DOMContentLoaded", function () {
         weightedGPASpan.textContent = weightedGPA;
         unweightedGPASpan.textContent = unweightedGPA;
     
-        saveDataToCookies();
+        this.saveDataToCookies();
     }
     
-    function saveDataToCookies() {
+    saveDataToCookies() {
         const rows = document.querySelectorAll("table tbody tr");
         const data = [];
     
@@ -159,16 +156,11 @@ document.addEventListener("DOMContentLoaded", function () {
             data.push(rowData);
         });
     
-        // Set the data to cookies
         document.cookie = `gpaCalculatorData=${JSON.stringify(data)}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
     }
     
-    function validateClassName(className) {
-        // Class name should not be empty and should only contain alphanumeric characters, spaces, and periods
-        return className.trim() !== "" && /^[a-zA-Z0-9\s.]+$/.test(className);
-    }
     
-    function populateDataFromCookies() {
+    populateDataFromCookies() {
         const cookieData = document.cookie
             .split(';')
             .map(cookie => cookie.trim())
@@ -177,10 +169,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (cookieData) {
             const data = JSON.parse(cookieData.split('=')[1]);
     
-            // Populate input fields with data from cookies
             data.forEach((rowData, index) => {
                 if (index === 0) {
-                    // If it's the first row, populate it directly
                     const row = document.querySelectorAll("table tbody tr")[index];
                     Object.entries(rowData).forEach(([name, value]) => {
                         const input = row.querySelector(`[name="${name}"]`);
@@ -189,8 +179,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                     });
                 } else {
-                    // If it's not the first row, add a new row and populate it
-                    addDefaultRow();
+                    this.addNewRow(); // Add a new row for each set of data
                     const lastRowIndex = document.querySelectorAll("table tbody tr").length - 1;
                     const row = document.querySelectorAll("table tbody tr")[lastRowIndex];
                     Object.entries(rowData).forEach(([name, value]) => {
@@ -202,17 +191,25 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         } else {
-            // If there are no cookie data, add the default row
-            addDefaultRow();
+            this.addDefaultRow();
         }
     }
     
-    function exportPDF() {
+    
+    updateStoredDataInCookies() {
+        document.querySelectorAll("input[name='class_name[]'], select[name='grade[]'], input[name='credits[]'], select[name='class_type[]']").forEach(input => {
+            input.addEventListener("change", () => {
+                this.saveDataToCookies();
+            });
+        });
+    }
+    
+    exportPDF() {
         domtoimage.toPng(document.body)
             .then(dataUrl => {
                 var img = new Image();
                 img.src = dataUrl;
-                img.onload = () => {
+                img.onload = function () {
                     var doc = new jsPDF('l', 'mm', [img.width, img.height]);
                     doc.addImage(dataUrl, 'PNG', 0, 0, img.width, img.height);
                     doc.save('VoyageurGPA.pdf');
@@ -222,21 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Error capturing screenshot:', error);
             });
     }    
+}
 
-    const addRowBtn = document.getElementById("addRowBtn");
-    addRowBtn.addEventListener("click", addNewRow);
-
-    document.addEventListener("click", handleButtonClick);
-
-    const calculateBtn = document.getElementById("calculateBtn");
-    calculateBtn.addEventListener("click", calculateGPA);
-
-    document.querySelectorAll("input[name='class_name[]'], select[name='grade[]'], input[name='credits[]'], select[name='class_type[]']").forEach(input => {
-        input.addEventListener("change", saveDataToCookies);
-    });
-
-    document.getElementById('exportPdfBtn').addEventListener('click', exportPDF);
-
-    populateDataFromCookies();
-});
-
+// Instantiate GPACalculator
+const gpaCalculator = new GPACalculator();
