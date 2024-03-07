@@ -185,32 +185,40 @@ class GPACalculator {
         // Append user ID to the cookie name
         document.cookie = `gpaCalculatorData_${this.userId}=${JSON.stringify(data)}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
     }
-    
-    // Populate GPA table data from cookies
-    populateDataFromCookies() {
+     // Function to populate GPA table data from cookies
+     populateDataFromCookies() {
+        // Extracting cookie data related to GPA calculator
         const cookieData = document.cookie
-        .split(';')
-        .map(cookie => cookie.trim())
-        .find(cookie => cookie.startsWith(`gpaCalculatorData_${this.userId}=`));
-    
+            .split(';')
+            .map(cookie => cookie.trim())
+            .find(cookie => cookie.startsWith(`gpaCalculatorData_${this.userId}=`));
+        
+        // If there's relevant cookie data
         if (cookieData) {
+            // Parse the cookie data
             const data = JSON.parse(cookieData.split('=')[1]);
-    
+
+            // Loop through each set of data
             data.forEach((rowData, index) => {
+                // If it's the first row, populate existing table row
                 if (index === 0) {
                     const row = document.querySelectorAll("table tbody tr")[index];
+                    // Loop through each entry in the row data
                     Object.entries(rowData).forEach(([name, value]) => {
                         const input = row.querySelector(`[name="${name}"]`);
+                        // If input found, set its value
                         if (input) {
                             input.value = value;
                         }
                     });
                 } else {
-                    this.addNewRow(); // Add a new row for each set of data
+                    this.addNewRow(); // Add a new row for each set of data after the first one
                     const lastRowIndex = document.querySelectorAll("table tbody tr").length - 1;
                     const row = document.querySelectorAll("table tbody tr")[lastRowIndex];
+                    // Loop through each entry in the row data
                     Object.entries(rowData).forEach(([name, value]) => {
                         const input = row.querySelector(`[name="${name}"]`);
+                        // If input found, set its value
                         if (input) {
                             input.value = value;
                         }
@@ -218,9 +226,11 @@ class GPACalculator {
                 }
             });
         } else {
+            // If no relevant cookie data found, add a default row
             this.addDefaultRow();
         }
     }
+
     
     // Update stored data in cookies when inputs change
     updateStoredDataInCookies() {
