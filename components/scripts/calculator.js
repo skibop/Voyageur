@@ -5,9 +5,10 @@
 */
 
 class GPACalculator {
-    constructor() {
+    constructor(userId) {
         // Maximum number of rows allowed in the GPA table
         this.MAX_ROWS = 8;
+        this.userId = userId;
 
         // HTML template for a new row in the GPA table
         this.newRow = `
@@ -171,7 +172,7 @@ class GPACalculator {
     saveDataToCookies() {
         const rows = document.querySelectorAll("table tbody tr");
         const data = [];
-    
+
         rows.forEach(row => {
             const inputs = row.querySelectorAll("input, select");
             const rowData = {};
@@ -180,16 +181,17 @@ class GPACalculator {
             });
             data.push(rowData);
         });
-    
-        document.cookie = `gpaCalculatorData=${JSON.stringify(data)}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
+
+        // Append user ID to the cookie name
+        document.cookie = `gpaCalculatorData_${this.userId}=${JSON.stringify(data)}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
     }
     
     // Populate GPA table data from cookies
     populateDataFromCookies() {
         const cookieData = document.cookie
-            .split(';')
-            .map(cookie => cookie.trim())
-            .find(cookie => cookie.startsWith('gpaCalculatorData='));
+        .split(';')
+        .map(cookie => cookie.trim())
+        .find(cookie => cookie.startsWith(`gpaCalculatorData_${this.userId}=`));
     
         if (cookieData) {
             const data = JSON.parse(cookieData.split('=')[1]);
