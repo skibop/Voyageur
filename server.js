@@ -55,11 +55,27 @@ class App {
     this.app.post('/login', (req, res) => this.handleLoginRequest(req, res));
     this.app.get('/profile', (req, res) => this.handleProfilePage(req, res));
     this.app.get('/get-user-data', (req, res) => this.handleGetUserData(req, res));
+    this.app.get('/instructions', (req, res) => this.handleInstructionsPage(req,res));
+    this.app.get('/QA', (req, res) => this.handleQAPage(req, res));
+    this.app.get('/calculator', (req, res) => this.handleGPACalculator(req,res))
+
   }
 
   // Handler for serving the login page
   async handleLoginPage(req, res) {
     res.sendFile(path.join(__dirname, 'components', 'login', 'login.html'));
+  }
+
+  async handleInstructionsPage(req, res) {
+    res.sendFile(path.join(__dirname, 'components', 'html', 'instructions.html'));
+  }
+
+  async handleQAPage(req, res) {
+    res.sendFile(path.join(__dirname, 'components', 'html', 'Q&A.html'));
+  }  
+
+  async handleGPACalculator(req, res) {
+    res.sendFile(path.join(__dirname, 'components', 'html', 'calculator.html'))
   }
 
   // Handler for processing login requests
