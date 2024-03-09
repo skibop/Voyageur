@@ -51,7 +51,6 @@ class App {
   // Setup routes for the Express app
   async setupRoutes() {
     // Define routes for login, profile, and user data retrieval
-    this.app.get('/login', (req, res) => this.handleLoginPage(req, res));
     this.app.post('/login', (req, res) => this.handleLoginRequest(req, res));
     this.app.get('/profile', (req, res) => this.handleProfilePage(req, res));
     this.app.get('/get-user-data', (req, res) => this.handleGetUserData(req, res));
