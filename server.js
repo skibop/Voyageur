@@ -12,7 +12,7 @@ class App {
     // Initialize Express app
     this.app = express();
     // Set port for the server
-    this.port = process.env.PORT || 80 || 8080;
+    this.port = process.env.PORT;
     // Set session secret from environment variables
     this.sessionSecret = process.env.SECRET;
     // Set MongoDB database name
