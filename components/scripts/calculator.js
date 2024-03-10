@@ -7,7 +7,7 @@
 class GPACalculator {
     constructor(userId) {
         // Maximum number of rows allowed in the GPA table
-        this.MAX_ROWS = 8;
+        this.MAX_ROWS = 10;
         this.userId = userId;
 
         // HTML template for a new row in the GPA table
