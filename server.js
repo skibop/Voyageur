@@ -113,7 +113,7 @@ class App {
 
   // Start the Express server
   start() {
-    this.app.listen(this.port, () => console.log(colors.red(`Server is running on http://localhost:${this.port}/login`)));
+    this.app.listen(this.port, () => console.log(colors.yellow(`Server is running on http://localhost:${this.port}/login`)));
   }
 }
 
