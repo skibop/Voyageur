@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Set character encoding -->
+  <meta charset="UTF-8">
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="/css/calculator.css">
+  <link rel="icon" href="/assets/Voyageur.ico" type="image/x-icon">
+</head>
+<body>
+  <header>
+    <!-- Logo -->
+    <img src="/assets/clean.png" alt="Your Logo" class="logo">
+    <!-- Heading -->
+    <h1>GPA Calculator</h1>
+    <!-- Navigation -->
+    <nav>
+      <ul class="navbar">
+        <!-- Navigation links -->
+        <li><a href="/profile" class="nav-link">Home</a></li>  
+        <li><a href="/instructions" class="nav-link">Instructions</a></li>
+        <li><a href="/QA" class="nav-link">Q&A</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Main section -->
+    <section class="glass">
+      <!-- Calculator heading -->
+      <h2>GPA Calculator</h2>
+      <!-- Link to grading scale with target blank to open in new tab -->
+      <a href="/assets/grading_scale.png" target="_blank" style="color: white; text-decoration: none;">
+        <h4>Grading Scale</h4>
+      </a>
+      <!-- Calculator content -->
+      <div class="calculator-content">
+        <!-- Table for input fields -->
+        <table>
+          <thead>
+            <tr>
+              <!-- Table headers -->
+              <th>Class Name</th>
+              <th>Grade</th>
+              <th>Credits</th>
+              <th>Class Type</th>
+              <th></th> <!-- Empty header for Remove Row buttons -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <!-- Table row for input fields -->
+              <td><input type="text" name="class_name[]" placeholder="Class Name" class="input-field"></td>
+              <td>
+                <!-- Dropdown for grades -->
+                <select name="grade[]" class="select-field">
+                  <option value="A">A</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="B-">B-</option>
+                  <option value="C+">C+</option>
+                  <option value="C">C</option>
+                  <option value="C-">C-</option>
+                  <option value="D">D</option>
+                  <option value="F">F</option>
+                </select>
+              </td>
+              <td><input type="number" name="credits[]" placeholder="Credits" min="0" max="10" class="input-field"></td>
+              <td>
+                <!-- Dropdown for class types -->
+                <select name="class_type[]" class="select-field">
+                  <option value="standard">Standard</option>
+                  <option value="honors">Honors</option>
+                  <option value="ap">AP/College-Level</option>
+                </select>
+              </td>
+              <td><button class="removeRowBtn">&times;</button></td> <!-- Replace "Remove Row" text with &times; for X -->
+            </tr>
+          </tbody>
+        </table>
+        <!-- Button group -->
+        <div class="button-group">
+          <button id="addRowBtn">Add Row</button>
+          <button id="calculateBtn">Calculate GPA</button>
+          <button id="exportPdfBtn">Export PDF</button> <!-- Export PDF button -->
+        </div>
+        <!-- GPA results -->
+        <div class="gpa-results">
+          <span class="weighted-gpa"><strong>Weighted GPA:</strong> <strong><span class="result-value">--</span></strong></span>
+          <span class="unweighted-gpa"><strong>Unweighted GPA:</strong> <strong><span class="result-value">--</span></strong></span>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Link to JavaScript file -->
+  <script src="/scripts/calculator.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
+</body>
+</html>

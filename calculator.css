@@ -1,0 +1,185 @@
+/* Body Styles */
+body {
+  font-family: 'Open Sans', sans-serif; /* Use Open Sans font for the entire document */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  background: linear-gradient(to right, #4285f4, #b388ff); /* Blue to Light Purple gradient background */
+  color: #fff; /* Set text color to white */
+}
+
+/* Header Styles */
+header {
+  display: flex; /* Set display to flex */
+  flex-direction: column; /* Arrange items in column */
+  justify-content: center; /* Center align vertically */
+  align-items: center; /* Center align horizontally */
+  padding: 40px 20px; /* Padding */
+}
+
+/* Heading Styles */
+h1 {
+  margin: 0; /* Remove default margin */
+  color: #fff; /* Set text color to white */
+  text-align: center; /* Center align text */
+}
+
+/* Navigation Styles */
+.navbar {
+  display: flex; /* Set display to flex */
+  justify-content: center; /* Center align navigation links horizontally */
+  list-style: none; /* Remove default list style */
+  padding: 0; /* Remove default padding */
+}
+
+.nav-link {
+  text-decoration: none; /* Remove underline from links */
+  color: #fff; /* Set text color to white */
+  padding: 10px 20px; /* Padding */
+  margin: 0 10px; /* Margin */
+  border-radius: 5px; /* Add border radius */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Lighten background color on hover */
+}
+
+/* Main Styles */
+main {
+  max-width: 800px; /* Set maximum width */
+  margin: 20px auto; /* Center align with auto margins */
+  padding: 20px; /* Padding */
+}
+
+/* Section Styles */
+section {
+  margin-bottom: 20px; /* Add margin bottom */
+  padding: 20px; /* Padding */
+  border-radius: 10px; /* Add border radius */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth transition for transform, box-shadow, and background-color */
+}
+
+/* Glass Effect Styles */
+.glass {
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Box shadow */
+}
+
+.glass:hover {
+  transform: translateY(-5px); /* Move up slightly on hover */
+  box-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.5); /* Change box shadow on hover */
+  background: rgba(255, 255, 255, 0.3); /* Change background color on hover */
+}
+
+/* Footer Styles */
+footer {
+  text-align: center; /* Center align text */
+  padding: 10px; /* Padding */
+}
+
+/* Calculator Content Styles */
+.calculator-content {
+  display: flex; /* Set display to flex */
+  flex-direction: column; /* Arrange items in column */
+  align-items: center; /* Center align horizontally */
+}
+
+/* Table Styles */
+table {
+  width: 100%; /* Set width to 100% */
+  border-collapse: collapse; /* Collapse table borders */
+  margin-bottom: 20px; /* Add margin bottom */
+}
+
+table th, table td {
+  padding: 10px; /* Padding */
+  border-bottom: 1px solid #ddd; /* Add bottom border */
+  text-align: center; /* Center align text */
+}
+
+/* Input and Select Field Styles */
+.input-field, .select-field {
+  padding: 12px; /* Padding */
+  border: none; /* Remove border */
+  border-radius: 8px; /* Add border radius */
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  color: #333; /* Set text color */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+  margin-bottom: 15px; /* Add margin bottom */
+  width: 100%; /* Set width to 100% */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.input-field:focus, .select-field:focus {
+  background-color: rgba(255, 255, 255, 0.9); /* Lighten background color on focus */
+}
+
+/* Button Styles */
+button {
+  padding: 12px 24px; /* Padding */
+  border: none; /* Remove border */
+  border-radius: 8px; /* Add border radius */
+  background-color: #5181FF; /* Blue color */
+  color: #fff; /* Set text color to white */
+  cursor: pointer; /* Add cursor pointer */
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+  margin-bottom: 15px; /* Add margin bottom */
+}
+
+button:hover {
+  background-color: #3e6edc; /* Darker shade of the blue color on hover */
+}
+
+/* Logo Styles */
+.logo {
+  max-width: 400px; /* Set maximum width */
+  max-height: 400px; /* Set maximum height */
+  width: auto; /* Maintain aspect ratio */
+  height: auto; /* Maintain aspect ratio */
+  position: absolute; /* Set position to absolute */
+  top: -110px; /* Position from top */
+  left: -90px; /* Position from left */
+}
+
+/* GPA Results Styles */
+.gpa-results {
+  display: flex; /* Set display to flex */
+  flex-direction: column; /* Arrange items in column */
+  align-items: center; /* Center align horizontally */
+  margin-top: 20px; /* Add margin top */
+}
+
+.result-value {
+  font-weight: 500; /* Set font weight to bold */
+}
+
+/* Button Container Styles */
+.button-container {
+  display: flex; /* Set display to flex */
+  justify-content: center; /* Center align horizontally */
+  margin-top: 15px; /* Add margin top */
+}
+
+.button-container button {
+  margin: 0 10px; /* Add margin around buttons */
+}
+
+/* Additional CSS for button placement */
+.button-group {
+  display: flex; /* Set display to flex */
+  gap: 10px; /* Adjust the spacing between buttons */
+}
+
+.button-group button {
+  flex: 1; /* Make buttons flexible to occupy equal space */
+}
+
+/* Remove Row Button Styles */
+.removeRowBtn {
+  background-color: transparent; /* Transparent background */
+  border: none; /* Remove border */
+  color: red; /* Set text color to red */
+  font-size: 20px; /* Set font size */
+  cursor: pointer; /* Add cursor pointer */
+}
