@@ -57,7 +57,6 @@ class App {
     this.app.get('/instructions', (req, res) => this.handleInstructionsPage(req,res));
     this.app.get('/QA', (req, res) => this.handleQAPage(req, res));
     this.app.get('/calculator', (req, res) => this.handleGPACalculator(req,res))
-
   }
 
   // Handler for serving the login page
