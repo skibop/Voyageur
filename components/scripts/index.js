@@ -82,7 +82,7 @@ class UserDataFetcher {
     this.nameElement.textContent = userData.name || 'N/A';
     this.idElement.textContent = userData.ID || 'N/A';
     this.gradeElement.textContent = userData.grade || 'N/A';
-    this.yearbookImg.src = userData.Yearbook || './assets/yearbook.png'; // Set yearbook image
+    this.yearbookImg.src = userData.Yearbook || './assets/AnkitKale.png'; // Set yearbook image
   }
 }
 
