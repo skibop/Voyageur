@@ -117,8 +117,7 @@ class GPACalculator {
                     alert("Credits cannot be equal to 0.");
                 }
                 return;
-            }
-    
+            }    
             // Assign grade points based on the grade
             let gradePoints;
             switch (grade) {

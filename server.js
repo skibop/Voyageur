@@ -16,7 +16,7 @@ class App {
     // Set session secret from environment variables
     this.sessionSecret = process.env.SECRET;
     // Set MongoDB database name
-    this.dbName = 'VoyageurDB';
+    this.dbName = 'local';
     // Set MongoDB URI from environment variables
     this.uri = process.env.MONGO_URI;
     // Setup middleware for the Express app

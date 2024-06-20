@@ -75,7 +75,14 @@ const chatBot = new ChatBot();
 
 // Function to handle sending messages
 function handleMessage() {
-    const input = document.getElementById('user-input').value;
+    const input = document.getElementById('user-input').value.trim();
+    
+    // Check for empty input
+    if (!input) {
+        alert('Please enter a message.');
+        return; // Prevent further execution
+    }
+
     // Check for non-alphanumeric characters in the input
     if (/[^a-z0-9\s.?]/i.test(input)) {
         alert('Please only use alphanumeric characters, question marks, and decimal numbers.');
