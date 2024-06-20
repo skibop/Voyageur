@@ -95,29 +95,32 @@ class GPACalculator {
         const grades = document.querySelectorAll("select[name='grade[]']");
         const credits = document.querySelectorAll("input[name='credits[]']");
         const classTypes = document.querySelectorAll("select[name='class_type[]']");
-    
+        const classNames = document.querySelectorAll("input[name='class_name[]']");
+
         // Initialize variables for GPA calculation
         let weightedTotal = 0;
         let unweightedTotal = 0;
         let totalCredits = 0;
-    
+
         // Iterate through each row in the GPA table
         for (let i = 0; i < grades.length; i++) {
             const grade = grades[i].value;
             const credit = parseFloat(credits[i].value);
             const classType = classTypes[i].value;
-    
-            // Validate credits
-            if (credit < 0 || credit > 10 || credit === 0) {
-                if (credit < 0) {
-                    alert("Credits cannot be negative.");
-                } else if (credit > 10) {
-                    alert("Credits cannot be above 10.");
-                } else {
-                    alert("Credits cannot be equal to 0.");
-                }
+            const className = classNames[i].value.trim();
+
+            // Validate Class Name
+            if (className === "") {
+                alert("Please enter a Class Name for all rows.");
                 return;
-            }    
+            }
+
+            // Validate Credits
+            if (isNaN(credit) || credit <= 0 || credit > 10) {
+                alert("Credits must be a number between 0 and 10.");
+                return;
+            }
+
             // Assign grade points based on the grade
             let gradePoints;
             switch (grade) {
@@ -133,7 +136,7 @@ class GPACalculator {
                 case "F": gradePoints = 0; break;
                 default: gradePoints = 0;
             }
-    
+
             // Calculate weighted grade points
             let weightedGradePoints;
             if (grade === "D" || grade === "F") {
@@ -146,27 +149,27 @@ class GPACalculator {
                     weightedGradePoints += 1.0;
                 }
             }
-    
+
             // Calculate quality points and update totals
             const qualityPoints = weightedGradePoints * credit;
             totalCredits += credit;
             weightedTotal += qualityPoints;
             unweightedTotal += gradePoints * credit;
         }
-    
+
         // Calculate GPAs and update UI
-        const weightedGPA = (weightedTotal / totalCredits).toFixed(4).replace(/\.?0+$/, '');
-        const unweightedGPA = (unweightedTotal / totalCredits).toFixed(4).replace(/\.?0+$/, '');
-    
+        const weightedGPA = (weightedTotal / totalCredits).toFixed(2);
+        const unweightedGPA = (unweightedTotal / totalCredits).toFixed(2);
+
         const weightedGPASpan = document.querySelector(".weighted-gpa .result-value");
         const unweightedGPASpan = document.querySelector(".unweighted-gpa .result-value");
-    
-        weightedGPASpan.textContent = weightedGPA;
-        unweightedGPASpan.textContent = unweightedGPA;
-    
+
+        weightedGPASpan.textContent = isNaN(weightedGPA) ? "--" : weightedGPA;
+        unweightedGPASpan.textContent = isNaN(unweightedGPA) ? "--" : unweightedGPA;
+
         this.saveDataToCookies();
     }
-    
+
     // Save GPA table data to cookies
     saveDataToCookies() {
         const rows = document.querySelectorAll("table tbody tr");
@@ -184,14 +187,15 @@ class GPACalculator {
         // Append user ID to the cookie name
         document.cookie = `gpaCalculatorData_${this.userId}=${JSON.stringify(data)}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
     }
-     // Function to populate GPA table data from cookies
-     populateDataFromCookies() {
+
+    // Function to populate GPA table data from cookies
+    populateDataFromCookies() {
         // Extracting cookie data related to GPA calculator
         const cookieData = document.cookie
             .split(';')
             .map(cookie => cookie.trim())
             .find(cookie => cookie.startsWith(`gpaCalculatorData_${this.userId}=`));
-        
+
         // If there's relevant cookie data
         if (cookieData) {
             // Parse the cookie data
@@ -229,7 +233,6 @@ class GPACalculator {
             this.addDefaultRow();
         }
     }
-
     
     // Update stored data in cookies when inputs change
     updateStoredDataInCookies() {

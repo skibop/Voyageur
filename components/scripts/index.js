@@ -60,6 +60,7 @@ class UserDataFetcher {
     this.nameElement = document.getElementById('name');
     this.idElement = document.getElementById('id');
     this.gradeElement = document.getElementById('grade');
+    this.yearbookImg = document.getElementById('yearbook-img'); // Added image element
   }
 
   // Fetch user data from server
@@ -81,6 +82,7 @@ class UserDataFetcher {
     this.nameElement.textContent = userData.name || 'N/A';
     this.idElement.textContent = userData.ID || 'N/A';
     this.gradeElement.textContent = userData.grade || 'N/A';
+    this.yearbookImg.src = userData.Yearbook || './assets/yearbook.png'; // Set yearbook image
   }
 }
 
