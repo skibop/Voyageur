@@ -8,6 +8,7 @@ class TimeManager {
     this.timeElement = document.getElementById('current-time');
     this.dateElement = document.getElementById('current-date');
     this.modal = document.getElementById('modal');
+    this.modalImage = document.getElementById('modal-image'); // Added modal image element
     this.closeModalBtn = document.querySelector('#modal .close');
   }
 
@@ -35,8 +36,9 @@ class TimeManager {
   }
 
   // Open the modal and apply blur effect
-  openModal() {
+  openModal(imgSrc) {
     this.modal.style.display = 'block';
+    this.modalImage.src = imgSrc; // Set the modal image source
     this.applyBlur();
     // Add event listener to close modal when clicking on X button
     this.closeModalBtn.addEventListener('click', () => this.closeModal());
@@ -82,7 +84,9 @@ class UserDataFetcher {
     this.nameElement.textContent = userData.name || 'N/A';
     this.idElement.textContent = userData.ID || 'N/A';
     this.gradeElement.textContent = userData.grade || 'N/A';
-    this.yearbookImg.src = userData.Yearbook || './assets/AnkitKale.png'; // Set yearbook image
+    this.yearbookImg.src = userData.Yearbook || "./assets/AnkitKale.png";
+    // Update the modal image to be the same as yearbook image
+    timeManager.modalImage.src = userData.Yearbook || "./assets/AnkitKale.png";
   }
 }
 
@@ -93,5 +97,5 @@ setInterval(() => timeManager.updateTime(), 1000);
 // Instantiate UserDataFetcher and fetch user data
 const userDataFetcher = new UserDataFetcher();
 // Add event listener to open modal when clicking on image
-document.querySelector('.image-container img').addEventListener('click', () => timeManager.openModal());
+document.querySelector('.image-container img').addEventListener('click', () => timeManager.openModal(timeManager.modalImage.src));
 userDataFetcher.fetchUserData();
