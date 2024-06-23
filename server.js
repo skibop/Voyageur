@@ -56,7 +56,10 @@ class App {
     this.app.get('/get-user-data', (req, res) => this.handleGetUserData(req, res));
     this.app.get('/instructions', (req, res) => this.handleInstructionsPage(req,res));
     this.app.get('/QA', (req, res) => this.handleQAPage(req, res));
-    this.app.get('/calculator', (req, res) => this.handleGPACalculator(req,res))
+    this.app.get('/calculator', (req, res) => this.handleGPACalculator(req,res));
+    this.app.post('/add-course', (req, res) => this.handleAddCourse(req, res)); // New route for adding course
+    this.app.post('/remove-course', (req, res) => this.handleRemoveCourse(req, res)); // New route for removing course
+    this.app.get('/get-courses', (req, res) => this.handleGetCourses(req, res)); // New route for getting courses
   }
 
   // Handler for serving the login page
@@ -110,6 +113,70 @@ class App {
   // Handler for retrieving user data
   async handleGetUserData(req, res) {
     req.session.user ? res.json(req.session.user) : res.status(401).send('Not logged in');
+  }
+
+  async handleAddCourse(req, res) {
+    const client = new MongoClient(this.uri);
+    try {
+      await client.connect();
+      const coursesCollection = client.db(this.dbName).collection('classes');
+      const user = req.session.user;
+      if (!user) {
+        return res.status(401).send('Not logged in');
+      }
+
+      const course = { ...req.body, userId: user._id }; // Add userId to course data
+      await coursesCollection.insertOne(course);
+      res.status(200).send('Course added successfully');
+    } catch (error) {
+      console.error(colors.red('Error adding course:'), error.message);
+      res.status(500).send('Internal Server Error');
+    } finally {
+      await client.close();
+    }
+  }
+
+  // Handler for removing a course
+  async handleRemoveCourse(req, res) {
+    const client = new MongoClient(this.uri);
+    try {
+      await client.connect();
+      const coursesCollection = client.db(this.dbName).collection('classes');
+      const user = req.session.user;
+      if (!user) {
+        return res.status(401).send('Not logged in');
+      }
+
+      const { courseName, year } = req.body;
+      await coursesCollection.deleteOne({ userId: user._id, courseName, year });
+      res.status(200).send('Course removed successfully');
+    } catch (error) {
+      console.error(colors.red('Error removing course:'), error.message);
+      res.status(500).send('Internal Server Error');
+    } finally {
+      await client.close();
+    }
+  }
+
+  // Handler for getting courses for the logged-in user
+  async handleGetCourses(req, res) {
+    const client = new MongoClient(this.uri);
+    try {
+      await client.connect();
+      const coursesCollection = client.db(this.dbName).collection('classes');
+      const user = req.session.user;
+      if (!user) {
+        return res.status(401).send('Not logged in');
+      }
+
+      const courses = await coursesCollection.find({ userId: user._id }).toArray();
+      res.status(200).json(courses);
+    } catch (error) {
+      console.error(colors.red('Error retrieving courses:'), error.message);
+      res.status(500).send('Internal Server Error');
+    } finally {
+      await client.close();
+    }
   }
 
   // Start the Express server

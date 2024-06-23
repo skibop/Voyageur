@@ -25,7 +25,7 @@ class GPACalculator {
         this.addCourseBtn.addEventListener('click', () => this.addCourse());
 
         // Initialize existing courses if any (e.g., for edit scenarios)
-        this.initializeExistingCourses();
+        this.fetchCourses();
 
         // Export PDF button click event
         const exportPdfBtn = document.getElementById('export-pdf-btn');
@@ -52,48 +52,110 @@ class GPACalculator {
         this.calculateCumulativeGPA();
     }
 
-    addCourse() {
+    async fetchCourses() {
+        try {
+          const response = await fetch('/get-courses');
+          if (response.ok) {
+            const courses = await response.json();
+            courses.forEach(course => {
+              const { courseName, grade, credits, courseType, year } = course;
+              this.courseData[year].push({ courseName, grade, credits, courseType });
+              this.addCourseToTable(courseName, grade, credits, courseType, year);
+            });
+    
+            // Calculate GPA for each year
+            ['Freshman', 'Sophomore', 'Junior', 'Senior'].forEach(year => this.calculateGPA(year));
+            // Calculate cumulative GPA
+            this.calculateCumulativeGPA();
+          } else {
+            console.error('Failed to fetch courses:', response.statusText);
+          }
+        } catch (error) {
+          console.error('Error fetching courses:', error);
+        }
+      }
+    
+      addCourseToTable(courseName, grade, credits, courseType, year) {
+        const yearTableBody = document.getElementById(`${year.toLowerCase()}-table`).querySelector('tbody');
+        if (yearTableBody.rows.length < this.MAX_ROWS) {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${courseName}</td>
+            <td>${grade}</td>
+            <td>${credits}</td>
+            <td>${courseType}</td>
+            <td><button class="remove-btn" data-year="${year}" data-course="${courseName}">&times;</button></td>
+          `;
+          yearTableBody.appendChild(row);
+          row.querySelector('.remove-btn').addEventListener('click', (event) => this.removeCourse(event));
+        } else {
+          alert('You have reached the maximum limit of courses for this year.');
+        }
+      }
+    
+
+      async addCourse() {
         const courseName = document.getElementById('courseName').value;
         const grade = document.getElementById('grade').value;
         const credits = parseFloat(document.getElementById('credits').value);
         const courseType = document.getElementById('courseType').value;
         const year = document.getElementById('year').value;
-
+    
         if (courseName && grade && !isNaN(credits) && credits > 0 && courseType && year) {
-            const yearTableBody = document.getElementById(`${year.toLowerCase()}-table`).querySelector('tbody');
-            if (yearTableBody.rows.length < this.MAX_ROWS) {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${courseName}</td>
-                    <td>${grade}</td>
-                    <td>${credits}</td>
-                    <td>${courseType}</td>
-                    <td><button class="remove-btn" data-year="${year}" data-course="${courseName}">&times;</button></td>
-                `;
-                yearTableBody.appendChild(row);
-                row.querySelector('.remove-btn').addEventListener('click', (event) => this.removeCourse(event));
-                this.courseData[year].push({ courseName, grade, credits, courseType });
-                this.calculateGPA(year);
-                this.calculateCumulativeGPA();
+          try {
+            const response = await fetch('/add-course', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ courseName, grade, credits, courseType, year }),
+            });
+    
+            if (response.ok) {
+              this.addCourseToTable(courseName, grade, credits, courseType, year);
+              this.courseData[year].push({ courseName, grade, credits, courseType });
+              this.calculateGPA(year);
+              this.calculateCumulativeGPA();
             } else {
-                alert('You have reached the maximum limit of courses for this year.');
+              alert('Failed to add course');
             }
+          } catch (error) {
+            console.error('Error adding course:', error);
+          }
         } else {
-            alert('Please fill in all fields correctly.');
+          alert('Please fill in all fields correctly.');
         }
-    }
-
-    removeCourse(event) {
+      }
+    
+      async removeCourse(event) {
         const year = event.target.dataset.year;
         const courseName = event.target.dataset.course;
-        const index = this.courseData[year].findIndex(course => course.courseName === courseName);
-        if (index !== -1) {
-            this.courseData[year].splice(index, 1);
-            event.target.closest('tr').remove();
-            this.calculateGPA(year);
-            this.calculateCumulativeGPA();
+    
+        try {
+          const response = await fetch('/remove-course', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ courseName, year }),
+          });
+    
+          if (response.ok) {
+            const index = this.courseData[year].findIndex(course => course.courseName === courseName);
+            if (index !== -1) {
+              this.courseData[year].splice(index, 1);
+              event.target.closest('tr').remove();
+              this.calculateGPA(year);
+              this.calculateCumulativeGPA();
+            }
+          } else {
+            alert('Failed to remove course');
+          }
+        } catch (error) {
+          console.error('Error removing course:', error);
         }
-    }
+      }
+    
 
     calculateGPA(year) {
         const courses = this.courseData[year];
