@@ -76,6 +76,8 @@ class App {
     res.sendFile(path.join(__dirname, 'components', 'html', 'calculator.html'))
   }
 
+
+
   // Handler for processing login requests
   async handleLoginRequest(req, res) {
     const client = new MongoClient(this.uri);
@@ -109,8 +111,6 @@ class App {
   async handleGetUserData(req, res) {
     req.session.user ? res.json(req.session.user) : res.status(401).send('Not logged in');
   }
-
-
 
   // Start the Express server
   start() {

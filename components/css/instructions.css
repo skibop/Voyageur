@@ -5,7 +5,6 @@ body {
   padding: 0; /* Remove default padding */
   background: linear-gradient(to right, #4285f4, #b388ff); /* Blue to Light Purple gradient background */
   color: #fff; /* Set text color to white */
-  overflow: hidden; /* Add this line to remove the scrollbar */
 }
 
 /* Header Styles */

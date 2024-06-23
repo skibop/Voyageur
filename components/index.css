@@ -1,11 +1,15 @@
 /* Body Styles */
+
+
+
 body {
   font-family: 'Open Sans', sans-serif; /* Set font family */
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
   background: linear-gradient(to right, #4285f4, #b388ff); /* Blue to Light Purple gradient background */
   color: #fff; /* Set text color to white */
-  overflow: hidden; /* Add this line to remove the scrollbar */
+  display: flex; /* Use flexbox for body */
+  flex-direction: column; /* Column layout */
+  justify-content: space-between; /* Space content evenly */
+  min-height: 100%; /* Ensure body takes at least 100% height */
 }
 
 /* Header Styles */
@@ -17,6 +21,8 @@ header {
   padding: 40px 20px; /* Padding */
   backdrop-filter: blur(10px); /* Apply blur effect */
   position: relative;
+  width: 100%; /* Full width */
+  box-sizing: border-box; /* Include padding in width/height calculation */
 }
 
 /* Logo Styles - Placed within the header selector */
@@ -26,8 +32,8 @@ header {
   width: auto; /* Maintain aspect ratio */
   height: auto; /* Maintain aspect ratio */
   position: absolute; /* Set position to absolute */
-  top: -110px; /* Position from top */
-  left: -90px; /* Position from left */
+  top: -120px; /* Position from top */
+  right: -90px; /* Position from left */
 }
 
 /* Heading Styles */
@@ -63,6 +69,9 @@ main {
   max-width: 800px; /* Set maximum width */
   margin: 20px auto; /* Center align with auto margins */
   padding: 20px; /* Padding */
+  flex: 1; /* Allow main to grow and take available space */
+  width: 100%; /* Full width */
+  box-sizing: border-box; /* Include padding in width/height calculation */
 }
 
 /* Section Styles */
@@ -199,3 +208,40 @@ footer {
   height: auto;
 }
 
+/* Media Queries for smaller screens */
+@media (max-width: 768px) {
+  header {
+    padding: 20px 10px; /* Adjust padding for smaller screens */
+  }
+
+  .navbar {
+    flex-direction: column; /* Stack navigation links vertically */
+    align-items: center; /* Center align navigation links */
+  }
+
+  .nav-link {
+    margin: 5px 0; /* Adjust margin for smaller screens */
+  }
+
+  .logo {
+    max-width: 200px; /* Adjust logo size for smaller screens */
+    max-height: 200px; /* Adjust logo size for smaller screens */
+    top: -70px; /* Adjust position for smaller screens */
+    left: -50px; /* Adjust position for smaller screens */
+  }
+
+  .image-container {
+    margin-right: 0; /* Remove right margin for smaller screens */
+    margin-bottom: 20px; /* Add bottom margin for spacing */
+  }
+
+  .links-container {
+    flex-direction: column; /* Stack links vertically */
+    align-items: center; /* Center align links */
+  }
+
+  .link-item {
+    width: 100%; /* Full width */
+    max-width: none; /* Remove max-width restriction */
+  }
+}

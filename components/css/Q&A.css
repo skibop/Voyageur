@@ -154,6 +154,7 @@ button {
 
 .links-container {
   display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
   justify-content: space-between; /* Distribute space evenly */
   gap: 20px; /* Add gap between items */
 }
@@ -169,7 +170,8 @@ button {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
   flex: 1; /* Distribute items evenly */
-  min-width: 250px; /* Ensure a minimum width */
+  min-width: 200px; /* Ensure a minimum width */
+  max-width: 250px; /* Set a maximum width to prevent overflowing */
   text-decoration: none; /* Remove underline from link */
 }
 
@@ -190,7 +192,6 @@ button {
 .link-item span:hover {
   text-decoration: underline;
 }
-
 
 /* CSS to disable text selection */
 input[type="text"] {
@@ -214,4 +215,16 @@ input[type="text"] {
 .link-item > div, .link-item > span {
   display: block; /* Make the div or span occupy full space */
   padding: 10px; /* Add padding for clickable area */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .links-container {
+    flex-direction: column; /* Stack items vertically on small screens */
+    align-items: center; /* Center items */
+  }
+
+  .link-item {
+    max-width: 100%; /* Allow items to take full width on small screens */
+  }
 }
