@@ -48,7 +48,7 @@ h1 {
 
 /* Main Styles */
 main {
-  max-width: 800px; /* Set maximum width */
+  max-width: 880px; /* Set maximum width */
   margin: 20px auto; /* Center align with auto margins */
   padding: 20px; /* Padding */
 }
