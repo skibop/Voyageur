@@ -1,265 +1,162 @@
-/*
-  This script defines a GPACalculator class that calculates both weighted and unweighted GPAs based on user input.
-  It provides functionality to add, remove, and update rows dynamically, and stores data in cookies for persistence.
-  It also includes an option to export the GPA table as a PDF.
-*/
-
 class GPACalculator {
-    constructor(userId) {
-        // Maximum number of rows allowed in the GPA table
+    constructor() {
         this.MAX_ROWS = 10;
-        this.userId = userId;
-
-        // HTML template for a new row in the GPA table
-        this.newRow = `
-            <tr>
-                <td><input type="text" name="class_name[]" placeholder="Class Name" class="input-field"></td>
-                <td>
-                    <select name="grade[]" class="select-field">
-                        <option value="A">A</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B">B</option>
-                        <option value="B-">B-</option>
-                        <option value="C+">C+</option>
-                        <option value="C">C</option>
-                        <option value="C-">C-</option>
-                        <option value="D">D</option>
-                        <option value="F">F</option>
-                    </select>
-                </td>
-                <td><input type="number" name="credits[]" placeholder="Credits" min="0" max="10" class="input-field"></td>
-                <td>
-                    <select name="class_type[]" class="select-field">
-                        <option value="standard">Standard</option>
-                        <option value="honors">Honors</option>
-                        <option value="ap">AP/College-Level</option>
-                    </select>
-                </td>
-                <td><button class="removeRowBtn">&times;</button></td>
-            </tr>
-        `;
-
-        // Initialize the calculator when the DOM content is loaded
-        document.addEventListener("DOMContentLoaded", () => {
-            this.init();
-        });
+        this.courseData = {
+            "Freshman": [],
+            "Sophomore": [],
+            "Junior": [],
+            "Senior": []
+        };
+        this.gpaValues = {
+            "A": 4.0, "A-": 3.67, "B+": 3.33, "B": 3.0, "B-": 2.67,
+            "C+": 2.33, "C": 2.0, "C-": 1.67, "D": 1.0, "F": 0.0
+        };
+        // Adjusted weight factors for course types
+        this.courseTypeFactors = {
+            "Regular": 0,
+            "Honors": 0.5,
+            "AP": 1.0
+        };
+        this.init();
     }
 
-    // Initialize the GPA calculator
     init() {
-        // Event listeners for adding, removing rows, calculating GPA, and exporting PDF
-        const addRowBtn = document.getElementById("addRowBtn");
-        addRowBtn.addEventListener("click", () => this.addNewRow());
+        this.addCourseBtn = document.getElementById('add-course-btn');
+        this.addCourseBtn.addEventListener('click', () => this.addCourse());
 
-        document.addEventListener("click", (event) => {
-            if (event.target.classList.contains("removeRowBtn")) {
-                this.removeRow(event);
+        // Initialize existing courses if any (e.g., for edit scenarios)
+        this.initializeExistingCourses();
+
+        // Export PDF button click event
+        const exportPdfBtn = document.getElementById('export-pdf-btn');
+        exportPdfBtn.addEventListener('click', () => this.exportPDF());
+    }
+
+    initializeExistingCourses() {
+        // Retrieve and populate courses from the tables
+        ['Freshman', 'Sophomore', 'Junior', 'Senior'].forEach(year => {
+            const tableBody = document.getElementById(`${year.toLowerCase()}-table`).getElementsByTagName('tbody')[0];
+            const rows = tableBody.getElementsByTagName('tr');
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const courseName = cells[0].textContent.trim();
+                const grade = cells[1].textContent.trim();
+                const credits = parseFloat(cells[2].textContent.trim());
+                const courseType = cells[3].textContent.trim();
+                this.courseData[year].push({ courseName, grade, credits, courseType });
             }
+            this.calculateGPA(year);
         });
 
-        const calculateBtn = document.getElementById("calculateBtn");
-        calculateBtn.addEventListener("click", () => this.calculateGPA());
-
-        document.getElementById('exportPdfBtn').addEventListener('click', () => this.exportPDF());
-
-        // Populate and update stored data in cookies
-        this.populateDataFromCookies();
-        this.updateStoredDataInCookies();
+        // Calculate cumulative GPA
+        this.calculateCumulativeGPA();
     }
 
-    // Add a new row to the GPA table
-    addNewRow() {
-        const tableBody = document.querySelector("table tbody");
-        const numRows = tableBody.children.length;
-        if (numRows < this.MAX_ROWS) {
-            tableBody.insertAdjacentHTML("beforeend", this.newRow);
-            this.saveDataToCookies(); // Save data after adding the new row
+    addCourse() {
+        const courseName = document.getElementById('courseName').value;
+        const grade = document.getElementById('grade').value;
+        const credits = parseFloat(document.getElementById('credits').value);
+        const courseType = document.getElementById('courseType').value;
+        const year = document.getElementById('year').value;
+
+        if (courseName && grade && !isNaN(credits) && credits > 0 && courseType && year) {
+            const yearTableBody = document.getElementById(`${year.toLowerCase()}-table`).querySelector('tbody');
+            if (yearTableBody.rows.length < this.MAX_ROWS) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${courseName}</td>
+                    <td>${grade}</td>
+                    <td>${credits}</td>
+                    <td>${courseType}</td>
+                    <td><button class="remove-btn" data-year="${year}" data-course="${courseName}">&times;</button></td>
+                `;
+                yearTableBody.appendChild(row);
+                row.querySelector('.remove-btn').addEventListener('click', (event) => this.removeCourse(event));
+                this.courseData[year].push({ courseName, grade, credits, courseType });
+                this.calculateGPA(year);
+                this.calculateCumulativeGPA();
+            } else {
+                alert('You have reached the maximum limit of courses for this year.');
+            }
+        } else {
+            alert('Please fill in all fields correctly.');
         }
     }
 
-    // Remove a row from the GPA table
-    removeRow(event) {
-        const tableBody = document.querySelector("table tbody");
-        const numRows = tableBody.children.length;
-        if (numRows > 1) {
-            const row = event.target.closest("tr");
-            row.parentNode.removeChild(row);
-            this.saveDataToCookies();
+    removeCourse(event) {
+        const year = event.target.dataset.year;
+        const courseName = event.target.dataset.course;
+        const index = this.courseData[year].findIndex(course => course.courseName === courseName);
+        if (index !== -1) {
+            this.courseData[year].splice(index, 1);
+            event.target.closest('tr').remove();
+            this.calculateGPA(year);
+            this.calculateCumulativeGPA();
         }
     }
 
-    // Calculate weighted and unweighted GPAs
-    calculateGPA() {
-        // Retrieve grades, credits, and class types from the GPA table
-        const grades = document.querySelectorAll("select[name='grade[]']");
-        const credits = document.querySelectorAll("input[name='credits[]']");
-        const classTypes = document.querySelectorAll("select[name='class_type[]']");
-        const classNames = document.querySelectorAll("input[name='class_name[]']");
-
-        // Initialize variables for GPA calculation
-        let weightedTotal = 0;
-        let unweightedTotal = 0;
+    calculateGPA(year) {
+        const courses = this.courseData[year];
+        let totalWeightedPoints = 0;
+        let totalUnweightedPoints = 0;
         let totalCredits = 0;
 
-        // Iterate through each row in the GPA table
-        for (let i = 0; i < grades.length; i++) {
-            const grade = grades[i].value;
-            const credit = parseFloat(credits[i].value);
-            const classType = classTypes[i].value;
-            const className = classNames[i].value.trim();
-
-            // Validate Class Name
-            if (className === "") {
-                alert("Please enter a Class Name for all rows.");
-                return;
-            }
-
-            // Validate Credits
-            if (isNaN(credit) || credit <= 0 || credit > 10) {
-                alert("Credits must be a number between 0 and 10.");
-                return;
-            }
-
-            // Assign grade points based on the grade
-            let gradePoints;
-            switch (grade) {
-                case "A": gradePoints = 4.00; break;
-                case "A-": gradePoints = 3.67; break;
-                case "B+": gradePoints = 3.33; break;
-                case "B": gradePoints = 3.00; break;
-                case "B-": gradePoints = 2.67; break;
-                case "C+": gradePoints = 2.33; break;
-                case "C": gradePoints = 2.00; break;
-                case "C-": gradePoints = 1.67; break;
-                case "D": gradePoints = 1.00; break;
-                case "F": gradePoints = 0; break;
-                default: gradePoints = 0;
-            }
-
-            // Calculate weighted grade points
-            let weightedGradePoints;
-            if (grade === "D" || grade === "F") {
-                weightedGradePoints = gradePoints;
-            } else {
-                weightedGradePoints = gradePoints;
-                if (classType === "honors") {
-                    weightedGradePoints += 0.5;
-                } else if (classType === "ap") {
-                    weightedGradePoints += 1.0;
-                }
-            }
-
-            // Calculate quality points and update totals
-            const qualityPoints = weightedGradePoints * credit;
-            totalCredits += credit;
-            weightedTotal += qualityPoints;
-            unweightedTotal += gradePoints * credit;
-        }
-
-        // Calculate GPAs and update UI
-        const weightedGPA = (weightedTotal / totalCredits).toFixed(2);
-        const unweightedGPA = (unweightedTotal / totalCredits).toFixed(2);
-
-        const weightedGPASpan = document.querySelector(".weighted-gpa .result-value");
-        const unweightedGPASpan = document.querySelector(".unweighted-gpa .result-value");
-
-        weightedGPASpan.textContent = isNaN(weightedGPA) ? "--" : weightedGPA;
-        unweightedGPASpan.textContent = isNaN(unweightedGPA) ? "--" : unweightedGPA;
-
-        this.saveDataToCookies();
-    }
-
-    // Save GPA table data to cookies
-    saveDataToCookies() {
-        const rows = document.querySelectorAll("table tbody tr");
-        const data = [];
-
-        rows.forEach(row => {
-            const inputs = row.querySelectorAll("input, select");
-            const rowData = {};
-            inputs.forEach(input => {
-                rowData[input.name] = input.value;
-            });
-            data.push(rowData);
+        courses.forEach(course => {
+            const { grade, credits, courseType } = course;
+            const gradeValue = this.gpaValues[grade];
+            const typeFactor = this.courseTypeFactors[courseType];
+            totalWeightedPoints += (gradeValue + typeFactor) * credits;
+            totalUnweightedPoints += gradeValue * credits;
+            totalCredits += credits;
         });
 
-        // Append user ID to the cookie name
-        document.cookie = `gpaCalculatorData_${this.userId}=${JSON.stringify(data)}; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/`;
+        const weightedGPA = totalCredits ? (totalWeightedPoints / totalCredits).toFixed(2) : '--';
+        const unweightedGPA = totalCredits ? (totalUnweightedPoints / totalCredits).toFixed(2) : '--';
+
+        document.getElementById(`${year.toLowerCase()}-gpa-weighted`).textContent = weightedGPA;
+        document.getElementById(`${year.toLowerCase()}-gpa-unweighted`).textContent = unweightedGPA;
     }
 
-    // Function to populate GPA table data from cookies
-    populateDataFromCookies() {
-        // Extracting cookie data related to GPA calculator
-        const cookieData = document.cookie
-            .split(';')
-            .map(cookie => cookie.trim())
-            .find(cookie => cookie.startsWith(`gpaCalculatorData_${this.userId}=`));
+    calculateCumulativeGPA() {
+        let totalWeightedPoints = 0;
+        let totalUnweightedPoints = 0;
+        let totalCredits = 0;
 
-        // If there's relevant cookie data
-        if (cookieData) {
-            // Parse the cookie data
-            const data = JSON.parse(cookieData.split('=')[1]);
-
-            // Loop through each set of data
-            data.forEach((rowData, index) => {
-                // If it's the first row, populate existing table row
-                if (index === 0) {
-                    const row = document.querySelectorAll("table tbody tr")[index];
-                    // Loop through each entry in the row data
-                    Object.entries(rowData).forEach(([name, value]) => {
-                        const input = row.querySelector(`[name="${name}"]`);
-                        // If input found, set its value
-                        if (input) {
-                            input.value = value;
-                        }
-                    });
-                } else {
-                    this.addNewRow(); // Add a new row for each set of data after the first one
-                    const lastRowIndex = document.querySelectorAll("table tbody tr").length - 1;
-                    const row = document.querySelectorAll("table tbody tr")[lastRowIndex];
-                    // Loop through each entry in the row data
-                    Object.entries(rowData).forEach(([name, value]) => {
-                        const input = row.querySelector(`[name="${name}"]`);
-                        // If input found, set its value
-                        if (input) {
-                            input.value = value;
-                        }
-                    });
-                }
-            });
-        } else {
-            // If no relevant cookie data found, add a default row
-            this.addDefaultRow();
-        }
-    }
-    
-    // Update stored data in cookies when inputs change
-    updateStoredDataInCookies() {
-        document.querySelectorAll("input[name='class_name[]'], select[name='grade[]'], input[name='credits[]'], select[name='class_type[]']").forEach(input => {
-            input.addEventListener("change", () => {
-                this.saveDataToCookies();
+        Object.values(this.courseData).forEach(yearCourses => {
+            yearCourses.forEach(course => {
+                const { grade, credits, courseType } = course;
+                const gradeValue = this.gpaValues[grade];
+                const typeFactor = this.courseTypeFactors[courseType];
+                totalWeightedPoints += (gradeValue + typeFactor) * credits;
+                totalUnweightedPoints += gradeValue * credits;
+                totalCredits += credits;
             });
         });
+
+        const cumulativeWeightedGPA = totalCredits ? (totalWeightedPoints / totalCredits).toFixed(2) : '--';
+        const cumulativeUnweightedGPA = totalCredits ? (totalUnweightedPoints / totalCredits).toFixed(2) : '--';
+
+        document.getElementById('cumulative-gpa-weighted').textContent = cumulativeWeightedGPA;
+        document.getElementById('cumulative-gpa-unweighted').textContent = cumulativeUnweightedGPA;
     }
-    
-    // Export GPA table as a PDF
+
     exportPDF() {
-        domtoimage.toPng(document.body)
-            .then(dataUrl => {
-                var img = new Image();
-                img.src = dataUrl;
-                img.onload = function () {
-                    var doc = new jsPDF('l', 'mm', [img.width, img.height]);
-                    doc.addImage(dataUrl, 'PNG', 0, 0, img.width, img.height);
-                    doc.save('VoyageurGPA.pdf');
-                };
-            })
-            .catch(error => {
-                console.error('Error capturing screenshot:', error);
-            });
-    }    
+        // Select the entire document body to capture
+        const content = document.body;
+    
+        // Options for html2pdf
+        const options = {
+            filename: 'VoyageurGPA.pdf', // Optional, sets the PDF file name
+            image: { type: 'jpeg', quality: 1 }, // Optional, sets the image type and quality
+            html2canvas: { scale: 2, logging: true, scrollY: 0, scrollX: 0, windowWidth: document.documentElement.scrollWidth, windowHeight: document.documentElement},
+            jsPDF: { unit: 'pt', format: 'a4', orientation: 'landscape' } // Optional, sets PDF format and orientation
+        };
+    
+        // Use html2pdf library to generate PDF
+        html2pdf().set(options).from(content).save();
+    }
 }
 
-// Instantiate GPACalculator
-const gpaCalculator = new GPACalculator();
+document.addEventListener('DOMContentLoaded', () => {
+    new GPACalculator();
+});
