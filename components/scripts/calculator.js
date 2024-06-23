@@ -162,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function logout() {
-    logout();
-}
+    window.location.href = "/login";
+  }
+  
   
