@@ -1,138 +1,130 @@
 /* Body Styles */
 body {
-  font-family: 'Open Sans', sans-serif; /* Set font family */
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-  background: linear-gradient(to right, #4285f4, #b388ff); /* Blue to Light Purple gradient background */
-  color: #fff; /* Set text color to white */
-  overflow: hidden; /* Add this line to remove the scrollbar */
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #4285f4, #b388ff);
+  color: #fff;
 }
 
 /* Header Styles */
 header {
-  text-align: center; /* Center align text */
-  padding: 40px 0; /* Padding */
+  text-align: center;
+  padding: 40px 0;
 }
 
 /* Heading Styles */
 h1 {
-  margin: 0; /* Remove default margin */
+  margin: 0;
 }
 
 /* Main Styles */
 main {
-  max-width: 800px; /* Set maximum width */
-  margin: 20px auto; /* Center align with auto margins */
-  padding: 20px; /* Padding */
+  max-width: 1000px; /* Increased width for more space */
+  margin: 20px auto;
+  padding: 20px;
 }
 
 /* Section Styles */
 section {
-  margin-bottom: 20px; /* Add margin bottom */
-  padding: 20px; /* Padding */
-  border-radius: 10px; /* Add border radius */
-  backdrop-filter: blur(10px); /* Apply blur effect */
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
 }
 
 /* Glass Effect Styles */
 .glass {
-  background: rgba(0, 0, 0, 0.2); /* Semi-transparent background */
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Box shadow */
-}
-
-/* Footer Styles */
-footer {
-  text-align: center; /* Center align text */
-  padding: 10px; /* Padding */
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
 /* Input Styles */
 input[type="text"] {
-  width: calc(100% - 80px); /* Calculate input width */
-  padding: 10px; /* Padding */
-  margin-right: 10px; /* Margin right */
-  border: none; /* Remove border */
-  border-radius: 5px; /* Add border radius */
+  width: calc(100% - 80px);
+  padding: 10px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
 }
 
 /* Button Styles */
 button {
-  padding: 10px 20px; /* Padding */
-  border: none; /* Remove border */
-  border-radius: 5px; /* Add border radius */
-  background-color: #fff; /* Set background color to white */
-  color: #4285f4; /* Set text color to blue */
-  cursor: pointer; /* Set cursor to pointer */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #4285f4;
+  cursor: pointer;
 }
 
 button:hover {
-  background-color: rgba(255, 255, 255, 0.8); /* Lighten background color on hover */
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 /* Chat Box Styles */
 #chat-box {
-  max-height: 300px; /* Set maximum height */
-  overflow-y: auto; /* Enable vertical scroll */
+  max-height: 300px;
+  overflow-y: auto;
 }
 
 #chat-box div {
-  margin-bottom: 10px; /* Add margin bottom */
+  margin-bottom: 10px;
 }
 
 #chat-box .user {
-  text-align: right; /* Align user messages to the right */
+  text-align: right;
 }
 
 #chat-box .bot {
-  text-align: left; /* Align bot messages to the left */
+  text-align: left;
 }
 
 /* Input Container Styles */
 .input-container {
-  display: flex; /* Set display to flex */
-  margin-top: 20px; /* Add margin top */
+  display: flex;
+  margin-top: 20px;
 }
 
 input[type="text"] {
-  flex: 1; /* Allow input field to take remaining space */
+  flex: 1;
 }
 
 button {
-  margin-left: 10px; /* Add margin left */
+  margin-left: 10px;
 }
 
 /* Navigation Styles */
 .navbar {
-  display: flex; /* Set display to flex */
-  justify-content: center; /* Center align navigation links horizontally */
-  list-style: none; /* Remove default list style */
-  padding: 0; /* Remove default padding */
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
 }
 
 .nav-link {
-  text-decoration: none; /* Remove underline from links */
-  color: #fff; /* Set text color to white */
-  padding: 10px 20px; /* Padding */
-  margin: 0 10px; /* Margin */
-  border-radius: 5px; /* Add border radius */
-  transition: background-color 0.3s ease; /* Smooth transition for background color */
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Lighten background color on hover */
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Logo Styles */
 .logo {
-  max-width: 400px; /* Set maximum width */
-  max-height: 400px; /* Set maximum height */
-  width: auto; /* Maintain aspect ratio */
-  height: auto; /* Maintain aspect ratio */
-  position: absolute; /* Set position to absolute */
-  top: -110px; /* Position from top */
-  left: -90px; /* Position from left */
+  max-width: 400px;
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: -110px;
+  left: -90px;
 }
-
 
 /* Positioning for logout button */
 .logout-btn {
@@ -145,6 +137,81 @@ button {
 }
 
 .logout-icon {
-  width: 20px; /* Adjust icon size as needed */
+  width: 12px;
   height: auto;
+}
+
+/* Important Links Section */
+.important-links {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.important-links h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.links-container {
+  display: flex;
+  justify-content: space-between; /* Distribute space evenly */
+  gap: 20px; /* Add gap between items */
+}
+
+.link-item {
+  display: flex;
+  flex-direction: column; /* Arrange items vertically */
+  align-items: center; /* Center items horizontally */
+  background: rgba(0, 0, 0, 0.2); /* Match the glass effect */
+  color: #fff; /* Ensure text is readable against the background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  flex: 1; /* Distribute items evenly */
+  min-width: 250px; /* Ensure a minimum width */
+  text-decoration: none; /* Remove underline from link */
+}
+
+.link-item img {
+  max-width: 50px;
+  margin-bottom: 10px;
+}
+
+.link-item span {
+  color: #fff;
+}
+
+.link-item:hover {
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.3); /* Darken background on hover */
+}
+
+.link-item span:hover {
+  text-decoration: underline;
+}
+
+
+/* CSS to disable text selection */
+input[type="text"] {
+  user-select: none; Standard syntax
+  -webkit-user-select: none; /* Webkit (Safari, Chrome) browsers */
+  -moz-user-select: none; /* Mozilla Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+/* CSS to make links unclickable except the whole area */
+.link-item {
+  display: inline-block;
+  margin: 10px; /* Adjust as needed */
+  text-decoration: none; /* Remove underline */
+}
+
+.link-item > * {
+  pointer-events: none; /* Disable pointer events for all children */
+}
+
+.link-item > div, .link-item > span {
+  display: block; /* Make the div or span occupy full space */
+  padding: 10px; /* Add padding for clickable area */
 }

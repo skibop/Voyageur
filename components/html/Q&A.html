@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Set character encoding -->
   <meta charset="UTF-8">
-  <!-- Set viewport for responsive design -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Set title of the document -->
   <title>Q&A</title>
-  <!-- Link to external stylesheet -->
   <link rel="stylesheet" href="/css/Q&A.css">
   <link rel="icon" href="/assets/Voyageur.ico" type="image/x-icon">
 </head>
 <body>
   <header>
-    <!-- Logo -->
     <img src="/assets/clean.png" alt="Your Logo" class="logo">
-    <!-- Heading -->
     <h1>Q&A</h1>
-    <!-- Navigation -->
     <nav>
       <ul class="navbar">
-        <!-- Navigation links -->
         <li><a href="/profile" class="nav-link">Home</a></li>
         <li><a href="/instructions" class="nav-link">Instructions</a></li>
         <li><a href="/calculator" class="nav-link">GPA Calculator</a></li>
@@ -31,20 +23,34 @@
     </button>
   </header>
   <main>
-    <!-- Main section -->
     <section class="glass">
-      <!-- Chat box -->
       <div id="chat-box">
-        <!-- Chat messages will be displayed here -->
       </div>
-      <!-- Input container for user interaction -->
       <div class="input-container">
         <input type="text" id="user-input" placeholder="Ask a question related to GPA...">
         <button id="send-btn">Send</button>
       </div>
     </section>
+
+    <!-- New Important Links Section -->
+    <section class="important-links">
+      <h2>Important Links</h2>
+      <div class="links-container">
+        <a href="https://sites.google.com/sbschools.org/sbhs-guidancesps/college-career/career?authuser=0" class="link-item">
+          <img src="/assets/career.png" alt="Career Pathways">
+          <span>Career Pathways</span>
+        </a>
+        <a href="https://docs.google.com/document/d/1VA02D0Q61DoiMb9gHKEzITo9BbrQzdBeSDsjss74lA8/edit" class="link-item">
+          <img src="/assets/catalog.png" alt="Course Catalog">
+          <span>Course Catalog</span>
+        </a>
+        <a href="https://sites.google.com/sbschools.org/sbhs-guidancesps/scheduling/graduation-requirements?authuser=0" class="link-item">
+          <img src="/assets/grad.png" alt="Graduation Requirements">
+          <span>Graduation Requirements</span>
+        </a>
+      </div>
+    </section>
   </main>
-  <!-- Link to JavaScript file -->
   <script src="/scripts/Q&A.js"></script>
 </body>
 </html>
