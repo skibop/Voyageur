@@ -99,3 +99,8 @@ const userDataFetcher = new UserDataFetcher();
 // Add event listener to open modal when clicking on image
 document.querySelector('.image-container img').addEventListener('click', () => timeManager.openModal(timeManager.modalImage.src));
 userDataFetcher.fetchUserData();
+
+
+function logout() {
+  window.location.href = "/login";
+}

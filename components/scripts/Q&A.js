@@ -118,3 +118,8 @@ document.getElementById('user-input').addEventListener('keypress', function(even
         handleMessage(); // Call the handleMessage function when Enter is pressed
     }
 });
+
+function logout() {
+    window.location.href = "/login";
+  }
+  

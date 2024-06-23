@@ -67,3 +67,7 @@ class LoginForm {
 document.addEventListener('DOMContentLoaded', () => {
   const loginForm = new LoginForm();
 });
+
+function logout() {
+  window.location.href = "/login";
+}

@@ -160,3 +160,8 @@ class GPACalculator {
 document.addEventListener('DOMContentLoaded', () => {
     new GPACalculator();
 });
+
+function logout() {
+    window.location.href = "/login";
+}
+  

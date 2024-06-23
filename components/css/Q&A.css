@@ -132,3 +132,19 @@ button {
   top: -110px; /* Position from top */
   left: -90px; /* Position from left */
 }
+
+
+/* Positioning for logout button */
+.logout-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.logout-icon {
+  width: 20px; /* Adjust icon size as needed */
+  height: auto;
+}
