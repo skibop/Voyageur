@@ -3,7 +3,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(to right, #4285f4, #b388ff);
+  background: linear-gradient(to right, #01182d, #8e44ad); /* Dark Blue to Dark Purple gradient background */
   color: #fff;
 }
 
@@ -129,7 +129,7 @@ button {
 /* Positioning for logout button */
 .logout-btn {
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 10px;
   background: none;
   border: none;
@@ -137,7 +137,7 @@ button {
 }
 
 .logout-icon {
-  width: 12px;
+  width: 25px;
   height: auto;
 }
 

@@ -4,7 +4,7 @@
 
 body {
   font-family: 'Open Sans', sans-serif; /* Set font family */
-  background: linear-gradient(to right, #4285f4, #b388ff); /* Blue to Light Purple gradient background */
+  background: linear-gradient(to right, #01182d, #8e44ad); /* Dark Blue to Dark Purple gradient background */
   color: #fff; /* Set text color to white */
   display: flex; /* Use flexbox for body */
   flex-direction: column; /* Column layout */
@@ -194,9 +194,10 @@ footer {
 }
 
 /* Positioning for logout button */
+/* Positioning for logout button */
 .logout-btn {
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 10px;
   background: none;
   border: none;
@@ -204,7 +205,7 @@ footer {
 }
 
 .logout-icon {
-  width: 20px; /* Adjust icon size as needed */
+  width: 25px;
   height: auto;
 }
 
