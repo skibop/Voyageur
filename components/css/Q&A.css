@@ -194,7 +194,7 @@ button {
 
 /* CSS to disable text selection */
 input[type="text"] {
-  user-select: none; Standard syntax
+  user-select: none; /* Standard syntax */
   -webkit-user-select: none; /* Webkit (Safari, Chrome) browsers */
   -moz-user-select: none; /* Mozilla Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */

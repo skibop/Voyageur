@@ -162,6 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function logout() {
-    window.location.href = "/login";
+    logout();
 }
   

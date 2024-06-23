@@ -110,6 +110,8 @@ class App {
     req.session.user ? res.json(req.session.user) : res.status(401).send('Not logged in');
   }
 
+
+
   // Start the Express server
   start() {
     this.app.listen(this.port, () => console.log(colors.yellow(`Server is running on http://localhost:${this.port}/login`)));

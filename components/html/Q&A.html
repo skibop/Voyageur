@@ -24,12 +24,13 @@
   </header>
   <main>
     <section class="glass">
-      <div id="chat-box">
-      </div>
-      <div class="input-container">
-        <input type="text" id="user-input" placeholder="Ask a question related to GPA...">
-        <button id="send-btn">Send</button>
-      </div>
+      <!-- Embed Chatbase Chatbot -->
+      <iframe
+        src="https://www.chatbase.co/chatbot-iframe/4tn4jwWAa-ZrEojvgorLL"
+        width="100%"
+        style="height: 30%; min-height: 400px"
+        frameborder="0" 
+      ></iframe>
     </section>
 
     <!-- New Important Links Section -->
@@ -51,6 +52,9 @@
       </div>
     </section>
   </main>
-  <script src="/scripts/Q&A.js"></script>
+  
+  <script> function logout() {
+    window.location.href = "/login";
+  }</script>
 </body>
 </html>
