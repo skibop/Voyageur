@@ -18,7 +18,7 @@ class App {
     // Set MongoDB database name
     this.dbName = 'local';
     // Set MongoDB URI from environment variables
-    this.uri = process.env.MONGO_URI;
+    this.uri = process.env.MONGO_URI
     // Setup middleware for the Express app
     this.setupMiddleware();
     // Setup routes for the Express app
